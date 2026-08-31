@@ -8,31 +8,30 @@ import {
   LuTrash2,
   LuAperture,
   LuSlidersHorizontal,
-  LuTimer,
-  LuHeart
+  LuTimer
 } from 'react-icons/lu';
 
-// Photobooth Strip Themes (Unchanged as requested)
+// Photobooth Strip Themes (Emoji free)
 const THEMES = [
-  { id: 'soft-pink', name: '🌸 Soft Pink', bg: '#FDF2F8', text: '#831843', border: '#F472B6', photoBg: '#FBCFE8' },
-  { id: 'romance-rose', name: '💖 Romance Rose', bg: '#4A0E17', text: '#FCE7F3', border: '#FB7185', photoBg: '#2D0A10' },
-  { id: 'cute-brown', name: '🧸 Cozy Teddy', bg: '#2C1A14', text: '#FDE68A', border: '#D97706', photoBg: '#452719' },
-  { id: 'milk-tea', name: '🧋 Milk Tea', bg: '#F5EBE0', text: '#5C3D2E', border: '#D5B9B2', photoBg: '#E3D5CA' },
-  { id: 'cyber-cyan', name: '✨ Cyber Cyan', bg: '#0F172A', text: '#E2E8F0', border: '#0891B2', photoBg: '#1E293B' },
-  { id: 'midnight', name: '🌙 Midnight Glass', bg: '#0B132B', text: '#F8FAFC', border: '#1E293B', photoBg: '#1C2541' },
-  { id: 'deep-ocean', name: '🌊 Deep Ocean', bg: '#03071E', text: '#F1F5F9', border: '#1D4ED8', photoBg: '#0F172A' },
-  { id: 'pure-white', name: '☁️ Pure White', bg: '#FFFFFF', text: '#0F172A', border: '#CBD5E1', photoBg: '#F1F5F9' },
+  { id: 'soft-pink', name: 'Soft Pink', bg: '#FDF2F8', text: '#831843', border: '#F472B6', photoBg: '#FBCFE8' },
+  { id: 'romance-rose', name: 'Romance Rose', bg: '#4A0E17', text: '#FCE7F3', border: '#FB7185', photoBg: '#2D0A10' },
+  { id: 'cute-brown', name: 'Cozy Teddy', bg: '#2C1A14', text: '#FDE68A', border: '#D97706', photoBg: '#452719' },
+  { id: 'milk-tea', name: 'Milk Tea', bg: '#F5EBE0', text: '#5C3D2E', border: '#D5B9B2', photoBg: '#E3D5CA' },
+  { id: 'cyber-cyan', name: 'Cyber Cyan', bg: '#0F172A', text: '#E2E8F0', border: '#0891B2', photoBg: '#1E293B' },
+  { id: 'midnight', name: 'Midnight Glass', bg: '#0B132B', text: '#F8FAFC', border: '#1E293B', photoBg: '#1C2541' },
+  { id: 'deep-ocean', name: 'Deep Ocean', bg: '#03071E', text: '#F1F5F9', border: '#1D4ED8', photoBg: '#0F172A' },
+  { id: 'pure-white', name: 'Pure White', bg: '#FFFFFF', text: '#0F172A', border: '#CBD5E1', photoBg: '#F1F5F9' },
 ];
 
-// Photo Filters Presets
+// Photo Filters Presets (Emoji free)
 const IMAGE_FILTERS = [
   { id: 'none', name: 'Normal', css: 'none', canvasFilter: 'none' },
-  { id: 'kawaii', name: '🎀 Soft Kawaii', css: 'brightness(112%) contrast(95%) saturate(135%) hue-rotate(-5deg)', canvasFilter: 'brightness(112%) contrast(95%) saturate(135%) hue-rotate(-5deg)' },
-  { id: 'pastel', name: '🌸 Pastel Dream', css: 'brightness(118%) contrast(90%) saturate(110%) sepia(15%)', canvasFilter: 'brightness(118%) contrast(90%) saturate(110%) sepia(15%)' },
-  { id: 'peach', name: '🍑 Warm Peach', css: 'brightness(108%) contrast(100%) saturate(130%) sepia(20%) hue-rotate(-10deg)', canvasFilter: 'brightness(108%) contrast(100%) saturate(130%) sepia(20%) hue-rotate(-10deg)' },
-  { id: 'glow', name: '✨ Angel Glow', css: 'brightness(120%) contrast(105%) saturate(125%)', canvasFilter: 'brightness(120%) contrast(105%) saturate(125%)' },
-  { id: 'vintage', name: '📷 Retro Film', css: 'sepia(45%) contrast(92%) brightness(105%)', canvasFilter: 'sepia(45%) contrast(92%) brightness(105%)' },
-  { id: 'bw', name: '🖤 Soft B&W', css: 'grayscale(100%) brightness(105%) contrast(110%)', canvasFilter: 'grayscale(100%) brightness(105%) contrast(110%)' },
+  { id: 'kawaii', name: 'Soft Kawaii', css: 'brightness(112%) contrast(95%) saturate(135%) hue-rotate(-5deg)', canvasFilter: 'brightness(112%) contrast(95%) saturate(135%) hue-rotate(-5deg)' },
+  { id: 'pastel', name: 'Pastel Dream', css: 'brightness(118%) contrast(90%) saturate(110%) sepia(15%)', canvasFilter: 'brightness(118%) contrast(90%) saturate(110%) sepia(15%)' },
+  { id: 'peach', name: 'Warm Peach', css: 'brightness(108%) contrast(100%) saturate(130%) sepia(20%) hue-rotate(-10deg)', canvasFilter: 'brightness(108%) contrast(100%) saturate(130%) sepia(20%) hue-rotate(-10deg)' },
+  { id: 'glow', name: 'Angel Glow', css: 'brightness(120%) contrast(105%) saturate(125%)', canvasFilter: 'brightness(120%) contrast(105%) saturate(125%)' },
+  { id: 'vintage', name: 'Retro Film', css: 'sepia(45%) contrast(92%) brightness(105%)', canvasFilter: 'sepia(45%) contrast(92%) brightness(105%)' },
+  { id: 'bw', name: 'Soft B&W', css: 'grayscale(100%) brightness(105%) contrast(110%)', canvasFilter: 'grayscale(100%) brightness(105%) contrast(110%)' },
 ];
 
 const TIMER_OPTIONS = [5, 10, 20, 30];
@@ -44,7 +43,7 @@ const Home = () => {
   const [selectedTheme, setSelectedTheme] = useState(THEMES[0]);
   const [selectedFilter, setSelectedFilter] = useState(IMAGE_FILTERS[0]);
   const [selectedTimer, setSelectedTimer] = useState(5);
-  const [caption, setCaption] = useState('STUDIO MEMORIES ✨');
+  const [caption, setCaption] = useState('STUDIO MEMORIES');
   const [stream, setStream] = useState(null);
   const [savedGallery, setSavedGallery] = useState([]);
   const [cameraError, setCameraError] = useState(false);
@@ -65,7 +64,7 @@ const Home = () => {
       const mediaStream = await navigator.mediaDevices.getUserMedia({
         video: { 
           facingMode: 'user',
-          aspectRatio: { ideal: 9 / 16 }
+          aspectRatio: { ideal: 4 / 3 } // Normal 4:3 aspect ratio
         },
         audio: false,
       });
@@ -111,11 +110,12 @@ const Home = () => {
     const vWidth = video.videoWidth || 640;
     const vHeight = video.videoHeight || 480;
 
-    canvas.width = 450;
-    canvas.height = 800;
+    // Normal 4:3 Aspect Ratio Output (640x480)
+    canvas.width = 640;
+    canvas.height = 480;
     const ctx = canvas.getContext('2d');
 
-    const targetRatio = 9 / 16;
+    const targetRatio = 4 / 3;
     const currentRatio = vWidth / vHeight;
     let sWidth = vWidth;
     let sHeight = vHeight;
@@ -149,7 +149,7 @@ const Home = () => {
         setCountdown(c);
         await new Promise((r) => setTimeout(r, 1000));
       }
-      setCountdown('SNAP! 📸');
+      setCountdown('SNAP!');
       await new Promise((r) => setTimeout(r, 250));
 
       const photoData = captureFrame();
@@ -172,9 +172,9 @@ const Home = () => {
 
     const cardWidth = 600;
     const photoWidth = 520;
-    const photoHeight = 924;
+    const photoHeight = 390; // 4:3 aspect ratio
     const padding = 40;
-    const gap = 24;
+    const gap = 20;
     const headerHeight = 50;
     const footerHeight = 140;
 
@@ -246,7 +246,7 @@ const Home = () => {
 
   return (
     <div className="min-h-screen bg-[#050C1A] text-slate-100 font-sans pb-28 px-4 pt-6 relative selection:bg-cyan-500/30 overflow-x-hidden">
-      {/* Enhanced Cyan Glassmorphism Ambient Glow Effects */}
+      {/* Dark Cyan Glassmorphism Background Glow */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
         <div className="absolute -top-40 -left-40 w-96 h-96 bg-cyan-500/15 rounded-full blur-[140px]" />
         <div className="absolute top-1/3 -right-32 w-96 h-96 bg-blue-600/15 rounded-full blur-[140px]" />
@@ -290,8 +290,8 @@ const Home = () => {
           </div>
         </div>
 
-        {/* Camera Feed Container */}
-        <div className="relative rounded-3xl overflow-hidden bg-slate-950/90 shadow-2xl border border-cyan-500/20 aspect-[9/16] flex items-center justify-center backdrop-blur-sm">
+        {/* Normal Sized Camera Container (4:3 aspect ratio) */}
+        <div className="relative rounded-3xl overflow-hidden bg-slate-950/90 shadow-2xl border border-cyan-500/20 aspect-[4/3] flex items-center justify-center backdrop-blur-sm">
           {cameraError ? (
             <div className="p-6 text-center space-y-3">
               <p className="text-rose-400 text-xs font-semibold">Camera Not Found!</p>
@@ -314,18 +314,18 @@ const Home = () => {
 
           {countdown && (
             <div className="absolute inset-0 bg-slate-950/80 backdrop-blur-lg flex items-center justify-center z-20">
-              <span className="text-cyan-400 text-6xl font-black tracking-widest animate-ping drop-shadow-[0_0_20px_rgba(6,182,212,0.6)]">
+              <span className="text-cyan-400 text-5xl font-black tracking-widest animate-ping drop-shadow-[0_0_20px_rgba(6,182,212,0.6)]">
                 {countdown}
               </span>
             </div>
           )}
 
           {!cameraError && (
-            <div className="absolute bottom-5 left-0 right-0 flex justify-center z-10">
+            <div className="absolute bottom-4 left-0 right-0 flex justify-center z-10">
               <button
                 disabled={isCapturing}
                 onClick={startPhotoboothSequence}
-                className={`px-7 py-3.5 rounded-2xl font-bold text-xs flex items-center gap-2 shadow-xl backdrop-blur-xl border transition-all ${
+                className={`px-6 py-3 rounded-2xl font-bold text-xs flex items-center gap-2 shadow-xl backdrop-blur-xl border transition-all ${
                   isCapturing
                     ? 'bg-slate-900/80 border-slate-800 text-slate-500 cursor-not-allowed'
                     : 'bg-gradient-to-r from-cyan-500 via-teal-500 to-blue-500 hover:from-cyan-400 hover:to-blue-400 border-cyan-300/40 text-white shadow-cyan-500/30 active:scale-95'
@@ -338,10 +338,10 @@ const Home = () => {
           )}
         </div>
 
-        {/* Photo Editing & Customize Controls */}
+        {/* Customization Options */}
         {photos.length === 4 && (
           <div className="space-y-6 pt-4 border-t border-cyan-500/20">
-            {/* Filter Effects Selection */}
+            {/* Filter Effects (Without Emojis) */}
             <div className="space-y-2">
               <h3 className="text-xs font-bold uppercase tracking-wider text-cyan-300/80 flex items-center gap-1.5 px-1">
                 <LuSlidersHorizontal className="w-4 h-4 text-cyan-400" /> Filter Effects
@@ -363,7 +363,7 @@ const Home = () => {
               </div>
             </div>
 
-            {/* Card Theme Selection */}
+            {/* Card Themes (Without Emojis) */}
             <div className="space-y-2">
               <h3 className="text-xs font-bold uppercase tracking-wider text-cyan-300/80 flex items-center gap-1.5 px-1">
                 <LuImage className="w-4 h-4 text-cyan-400" /> Card Themes
@@ -389,7 +389,7 @@ const Home = () => {
               </div>
             </div>
 
-            {/* Caption Title */}
+            {/* Caption Input */}
             <div className="bg-cyan-950/20 backdrop-blur-2xl p-3.5 rounded-2xl border border-cyan-500/20 shadow-lg">
               <label className="text-[10px] uppercase font-bold text-cyan-300/80 tracking-wider block mb-1.5">
                 Caption Title
@@ -403,7 +403,7 @@ const Home = () => {
               />
             </div>
 
-            {/* Strip Preview Container */}
+            {/* Photobooth Strip Preview */}
             <div
               className="p-5 rounded-3xl border shadow-2xl transition-all duration-300 space-y-4"
               style={{
@@ -416,11 +416,11 @@ const Home = () => {
                 • PHOTO BOOTH •
               </div>
 
-              <div className="space-y-3.5">
+              <div className="space-y-3">
                 {photos.map((src, i) => (
                   <div
                     key={i}
-                    className="p-1.5 rounded-2xl shadow-inner overflow-hidden transition-colors duration-300 aspect-[9/16]"
+                    className="p-1.5 rounded-2xl shadow-inner overflow-hidden transition-colors duration-300 aspect-[4/3]"
                     style={{ backgroundColor: selectedTheme.photoBg }}
                   >
                     <img
@@ -459,7 +459,7 @@ const Home = () => {
           </div>
         )}
 
-        {/* Saved Gallery Section */}
+        {/* Recent Saved Gallery */}
         {savedGallery.length > 0 && (
           <section className="pt-6 border-t border-cyan-500/20 space-y-3">
             <h3 className="text-xs font-bold uppercase tracking-wider text-cyan-300/80 px-1">
