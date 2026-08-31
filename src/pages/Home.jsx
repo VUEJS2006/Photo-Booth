@@ -9,56 +9,75 @@ import {
   LuSlidersHorizontal,
   LuTimer,
   LuSparkles,
-  LuSmile,
   LuUser,
-  LuCrown
+  LuLayers
 } from 'react-icons/lu';
 
-// Youth & Modern Cyan Dark Glassmorphism Themes with Custom Patterns & Lace Borders
-const THEMES = [
-  { 
-    id: 'cyan-cyber-glass', 
-    name: 'Cyan Cyber Glass', 
-    bg: '#051329', 
-    text: '#38BDF8', 
-    border: 'rgba(56, 189, 248, 0.4)', 
-    photoBg: '#091E3A', 
-    glassBg: 'rgba(15, 23, 42, 0.75)',
-    cardStyle: 'cyan-glow'
+// 6 Custom Aesthetic Frame Textures (No Emojis - Pure High-End Aesthetic Borders)
+const FRAME_TEXTURES = [
+  {
+    id: 'victorian-lace',
+    name: 'Victorian Lace',
+    bg: '#181214',
+    photoBg: '#281E22',
+    text: '#FDF0D5',
+    border: '#D4AF37',
+    style: 'lace',
+    description: 'Classic Vintage Lace & Gold Filigree'
   },
-  { 
-    id: 'vintage-lace-romance', 
-    name: 'Vintage Lace Romance', 
-    bg: '#1A0F12', 
-    text: '#FDE047', 
-    border: 'rgba(253, 224, 71, 0.4)', 
-    photoBg: '#2D161B', 
-    glassBg: 'rgba(45, 22, 27, 0.8)',
-    cardStyle: 'lace-border'
+  {
+    id: 'cyan-cyber-glass',
+    name: 'Cyan Cyber Glass',
+    bg: '#051329',
+    photoBg: '#0A2246',
+    text: '#38BDF8',
+    border: '#0EA5E9',
+    style: 'glass',
+    description: 'Neon Cyan & Translucent Glass Glow'
   },
-  { 
-    id: 'bokeh-sparkle-pink', 
-    name: 'Bokeh Heart Sparkle', 
-    bg: '#1F0B24', 
-    text: '#F472B6', 
-    border: 'rgba(244, 114, 182, 0.4)', 
-    photoBg: '#34103D', 
-    glassBg: 'rgba(52, 16, 61, 0.8)',
-    cardStyle: 'sparkle-pink'
+  {
+    id: 'romantic-filigree',
+    name: 'Romantic Filigree',
+    bg: '#1C0A15',
+    photoBg: '#321427',
+    text: '#F472B6',
+    border: '#EC4899',
+    style: 'filigree',
+    description: 'Floral Heart Ornaments & Soft Glow'
   },
-  { 
-    id: 'y2k-retro-neon', 
-    name: 'Y2K Youth Neon', 
-    bg: '#0F172A', 
-    text: '#818CF8', 
-    border: 'rgba(129, 140, 248, 0.4)', 
-    photoBg: '#1E1B4B', 
-    glassBg: 'rgba(30, 27, 75, 0.8)',
-    cardStyle: 'y2k-glow'
+  {
+    id: 'silver-royalty',
+    name: 'Silver Royalty Lace',
+    bg: '#0F172A',
+    photoBg: '#1E293B',
+    text: '#E2E8F0',
+    border: '#94A3B8',
+    style: 'silver',
+    description: 'Metallic Silver & Elegant Damask'
+  },
+  {
+    id: 'y2k-retro-chrome',
+    name: 'Y2K Retro Chrome',
+    bg: '#0A0A0C',
+    photoBg: '#18181B',
+    text: '#A855F7',
+    border: '#C084FC',
+    style: 'chrome',
+    description: 'Futuristic Glossy Chrome Edges'
+  },
+  {
+    id: 'pearl-minimal',
+    name: 'Rose Pearl Minimal',
+    bg: '#1A1417',
+    photoBg: '#2B2026',
+    text: '#FECDD3',
+    border: '#FB7185',
+    style: 'minimal',
+    description: 'Double Fine Line Corner Details'
   }
 ];
 
-// Bright Beauty Filters
+// Bright Porcelain Beauty Filters
 const IMAGE_FILTERS = [
   { 
     id: 'porcelain-bright', 
@@ -79,20 +98,11 @@ const IMAGE_FILTERS = [
     canvasFilter: 'brightness(112%) contrast(98%) saturate(125%) sepia(10%) hue-rotate(-10deg)' 
   },
   { 
-    id: 'vintage-warm', 
-    name: 'Vintage Film Touch', 
+    id: 'vintage-film', 
+    name: 'Vintage Touch', 
     css: 'brightness(105%) contrast(100%) saturate(120%) sepia(25%) hue-rotate(-5deg)', 
     canvasFilter: 'brightness(105%) contrast(100%) saturate(120%) sepia(25%) hue-rotate(-5deg)' 
   }
-];
-
-// Cute Icons & Youth Overlay Stamps
-const STICKERS = [
-  { id: 'panda', name: 'Panda Bear', symbol: '🐼' },
-  { id: 'heart-sparkle', name: 'Bokeh Hearts', symbol: '🩵' },
-  { id: 'crown-stamp', name: 'Sweet Crown', symbol: '👑' },
-  { id: 'sparkles', name: 'Shining Stars', symbol: '✨' },
-  { id: 'ribbon-stamp', name: 'Cute Ribbon', symbol: '🎀' }
 ];
 
 const TIMER_OPTIONS = [5, 10, 20, 30];
@@ -101,9 +111,8 @@ const Home = () => {
   const [photos, setPhotos] = useState([]);
   const [isCapturing, setIsCapturing] = useState(false);
   const [countdown, setCountdown] = useState(null);
-  const [selectedTheme, setSelectedTheme] = useState(THEMES[0]);
+  const [selectedFrame, setSelectedFrame] = useState(FRAME_TEXTURES[0]);
   const [selectedFilter, setSelectedFilter] = useState(IMAGE_FILTERS[0]);
-  const [selectedSticker, setSelectedSticker] = useState(STICKERS[0]);
   const [selectedTimer, setSelectedTimer] = useState(5);
   const [coupleNames, setCoupleNames] = useState('CHLOE & LEO');
   const [stream, setStream] = useState(null);
@@ -114,7 +123,7 @@ const Home = () => {
   const canvasRef = useRef(null);
 
   useEffect(() => {
-    const localData = localStorage.getItem('cyan_glass_gallery');
+    const localData = localStorage.getItem('cyan_glass_gallery_v2');
     if (localData) {
       setSavedGallery(JSON.parse(localData));
     }
@@ -213,7 +222,63 @@ const Home = () => {
     setIsCapturing(false);
   };
 
-  // Generate Photo Strip Canvas with Glass Glow Effect
+  // Canvas Drawing with Aesthetic Frame Textures & Lace Borders
+  const drawFrameTextures = (ctx, x, y, width, height, frameStyle, color) => {
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 2;
+
+    // 1. Victorian Lace Pattern
+    if (frameStyle === 'lace') {
+      ctx.strokeRect(x, y, width, height);
+      ctx.strokeRect(x + 5, y + 5, width - 10, height - 10);
+      
+      // Lace Loops Top/Bottom
+      for (let i = x + 10; i < x + width - 10; i += 12) {
+        ctx.beginPath();
+        ctx.arc(i, y + 3, 4, 0, Math.PI);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.arc(i, y + height - 3, 4, Math.PI, 0);
+        ctx.stroke();
+      }
+    } 
+    // 2. Cyan Cyber Glass Glow Lines
+    else if (frameStyle === 'glass') {
+      ctx.shadowColor = color;
+      ctx.shadowBlur = 12;
+      ctx.strokeRect(x, y, width, height);
+      ctx.shadowBlur = 0;
+
+      // Corner Accents
+      const cLen = 15;
+      ctx.lineWidth = 4;
+      ctx.beginPath();
+      ctx.moveTo(x - 4, y + cLen); ctx.lineTo(x - 4, y - 4); ctx.lineTo(x + cLen, y - 4);
+      ctx.moveTo(x + width - cLen, y - 4); ctx.lineTo(x + width + 4, y - 4); ctx.lineTo(x + width + 4, y + cLen);
+      ctx.moveTo(x - 4, y + height - cLen); ctx.lineTo(x - 4, y + height + 4); ctx.lineTo(x + cLen, y + height + 4);
+      ctx.moveTo(x + width - cLen, y + height + 4); ctx.lineTo(x + width + 4, y + height + 4); ctx.lineTo(x + width + 4, y + height - cLen);
+      ctx.stroke();
+    } 
+    // 3. Romantic Filigree
+    else if (frameStyle === 'filigree') {
+      ctx.strokeRect(x, y, width, height);
+      // Double inner frame
+      ctx.strokeRect(x + 6, y + 6, width - 12, height - 12);
+    } 
+    // 4. Silver Royalty Lace
+    else if (frameStyle === 'silver') {
+      ctx.strokeRect(x, y, width, height);
+      ctx.strokeRect(x + 4, y + 4, width - 8, height - 8);
+      ctx.strokeRect(x + 8, y + 8, width - 16, height - 16);
+    } 
+    // Default Clean Double Line
+    else {
+      ctx.strokeRect(x, y, width, height);
+      ctx.strokeRect(x + 4, y + 4, width - 8, height - 8);
+    }
+  };
+
   const generateCanvasAndSave = () => {
     if (photos.length < 4) return;
 
@@ -238,26 +303,32 @@ const Home = () => {
 
     // Background Gradient Layer
     const bgGradient = ctx.createLinearGradient(0, 0, totalWidth, totalHeight);
-    bgGradient.addColorStop(0, selectedTheme.bg);
-    bgGradient.addColorStop(1, selectedTheme.photoBg);
+    bgGradient.addColorStop(0, selectedFrame.bg);
+    bgGradient.addColorStop(1, selectedFrame.photoBg);
     ctx.fillStyle = bgGradient;
     ctx.fillRect(0, 0, totalWidth, totalHeight);
 
-    // Decorative Glass Borders for both strips
-    ctx.strokeStyle = selectedTheme.border;
-    ctx.lineWidth = 3;
-    ctx.strokeRect(outerMargin / 2, outerMargin / 2, colWidth + outerMargin / 2, totalHeight - outerMargin);
-    ctx.strokeRect(outerMargin + colWidth + gapBetweenCols - outerMargin / 4, outerMargin / 2, colWidth + outerMargin / 2, totalHeight - outerMargin);
+    // Draw Strip Outer Lace Textures
+    const col1X = outerMargin / 2;
+    const col1Y = outerMargin / 2;
+    const stripWidth = colWidth + outerMargin / 2;
+    const stripHeight = totalHeight - outerMargin;
 
-    // Header Titles
-    ctx.fillStyle = selectedTheme.text;
-    ctx.font = 'bold 22px sans-serif';
+    const col2X = outerMargin + colWidth + gapBetweenCols - outerMargin / 4;
+    const col2Y = outerMargin / 2;
+
+    drawFrameTextures(ctx, col1X, col1Y, stripWidth, stripHeight, selectedFrame.style, selectedFrame.border);
+    drawFrameTextures(ctx, col2X, col2Y, stripWidth, stripHeight, selectedFrame.style, selectedFrame.border);
+
+    // Header Title Text
+    ctx.fillStyle = selectedFrame.text;
+    ctx.font = 'bold 22px serif';
     ctx.textAlign = 'center';
 
     const col1CenterX = outerMargin + colWidth / 2;
     const col2CenterX = outerMargin + colWidth + gapBetweenCols + colWidth / 2;
 
-    const headerText = `${selectedSticker.symbol} LOVEBIRDS PHOTOBOOTH ${selectedSticker.symbol}`;
+    const headerText = 'LOVEBIRDS PHOTOBOOTH';
 
     ctx.fillText(headerText, col1CenterX, outerMargin + 35);
     ctx.fillText(headerText, col2CenterX, outerMargin + 35);
@@ -271,7 +342,7 @@ const Home = () => {
 
         // Column 1 Photo
         const col1PhotoX = outerMargin + (colWidth - photoWidth) / 2;
-        ctx.fillStyle = selectedTheme.photoBg;
+        ctx.fillStyle = selectedFrame.photoBg;
         ctx.fillRect(col1PhotoX - 6, yPos - 6, photoWidth + 12, photoHeight + 12);
 
         ctx.save();
@@ -279,9 +350,14 @@ const Home = () => {
         ctx.drawImage(img, col1PhotoX, yPos, photoWidth, photoHeight);
         ctx.restore();
 
+        // Photo Frame Accent Border
+        ctx.strokeStyle = selectedFrame.border;
+        ctx.lineWidth = 1.5;
+        ctx.strokeRect(col1PhotoX, yPos, photoWidth, photoHeight);
+
         // Column 2 Photo
         const col2PhotoX = outerMargin + colWidth + gapBetweenCols + (colWidth - photoWidth) / 2;
-        ctx.fillStyle = selectedTheme.photoBg;
+        ctx.fillStyle = selectedFrame.photoBg;
         ctx.fillRect(col2PhotoX - 6, yPos - 6, photoWidth + 12, photoHeight + 12);
 
         ctx.save();
@@ -289,44 +365,39 @@ const Home = () => {
         ctx.drawImage(img, col2PhotoX, yPos, photoWidth, photoHeight);
         ctx.restore();
 
-        // Icon Overlay
-        if (selectedSticker.symbol) {
-          ctx.font = '24px sans-serif';
-          ctx.fillText(selectedSticker.symbol, col1PhotoX + 25, yPos + 32);
-          ctx.fillText(selectedSticker.symbol, col2PhotoX + 25, yPos + 32);
-        }
+        ctx.strokeRect(col2PhotoX, yPos, photoWidth, photoHeight);
 
         loadedCount++;
         if (loadedCount === 4) {
           const today = new Date().toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' });
 
-          // Footer Text
-          ctx.fillStyle = selectedTheme.text;
+          // Footer Couple Names
+          ctx.fillStyle = selectedFrame.text;
           ctx.font = 'bold 24px serif';
           ctx.fillText(coupleNames, col1CenterX, totalHeight - footerHeight / 2 - 5);
           ctx.font = '500 13px sans-serif';
           ctx.globalAlpha = 0.8;
-          ctx.fillText(`• MOMENTS IN LOVE • ${today}`, col1CenterX, totalHeight - footerHeight / 2 + 25);
+          ctx.fillText(`MOMENTS IN LOVE • ${today}`, col1CenterX, totalHeight - footerHeight / 2 + 25);
           ctx.globalAlpha = 1.0;
 
-          ctx.fillStyle = selectedTheme.text;
+          ctx.fillStyle = selectedFrame.text;
           ctx.font = 'bold 24px serif';
           ctx.fillText(coupleNames, col2CenterX, totalHeight - footerHeight / 2 - 5);
           ctx.font = '500 13px sans-serif';
           ctx.globalAlpha = 0.8;
-          ctx.fillText(`• MOMENTS IN LOVE • ${today}`, col2CenterX, totalHeight - footerHeight / 2 + 25);
+          ctx.fillText(`MOMENTS IN LOVE • ${today}`, col2CenterX, totalHeight - footerHeight / 2 + 25);
           ctx.globalAlpha = 1.0;
 
           const dataUrl = canvas.toDataURL('image/png');
 
           const link = document.createElement('a');
-          link.download = `romance-glass-booth-${Date.now()}.png`;
+          link.download = `aesthetic-lace-booth-${Date.now()}.png`;
           link.href = dataUrl;
           link.click();
 
           const updatedGallery = [{ id: Date.now(), image: dataUrl, date: today, coupleNames }, ...savedGallery];
           setSavedGallery(updatedGallery);
-          localStorage.setItem('cyan_glass_gallery', JSON.stringify(updatedGallery));
+          localStorage.setItem('cyan_glass_gallery_v2', JSON.stringify(updatedGallery));
         }
       };
     });
@@ -335,29 +406,27 @@ const Home = () => {
   const deleteMemory = (id) => {
     const filtered = savedGallery.filter((item) => item.id !== id);
     setSavedGallery(filtered);
-    localStorage.setItem('cyan_glass_gallery', JSON.stringify(filtered));
+    localStorage.setItem('cyan_glass_gallery_v2', JSON.stringify(filtered));
   };
 
   return (
     <div className="min-h-screen bg-[#030914] text-cyan-50 font-sans pb-28 px-4 pt-6 relative overflow-x-hidden">
-      {/* Cyan Glass Glowing Particle Animations */}
+      {/* Background Cyan Glass Glow */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
         <div className="absolute -top-32 -left-32 w-96 h-96 bg-cyan-500/20 rounded-full blur-[160px] animate-pulse" />
         <div className="absolute top-1/2 -right-32 w-96 h-96 bg-blue-600/20 rounded-full blur-[160px]" />
-        <div className="absolute -bottom-32 left-1/3 w-96 h-96 bg-teal-500/15 rounded-full blur-[160px]" />
       </div>
 
       <div className="relative z-10 max-w-md mx-auto space-y-5">
-        {/* Cyan Glassmorphism Glass Panel Header */}
-        <header className="bg-slate-900/40 backdrop-blur-2xl border border-cyan-500/30 p-4.5 rounded-3xl shadow-[0_8px_32px_0_rgba(0,195,255,0.15)] flex justify-between items-center relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 to-transparent pointer-events-none" />
+        {/* Header */}
+        <header className="bg-slate-900/40 backdrop-blur-2xl border border-cyan-500/30 p-4.5 rounded-3xl shadow-xl flex justify-between items-center relative overflow-hidden">
           <div>
             <span className="text-[10px] font-extrabold uppercase tracking-widest text-cyan-400 flex items-center gap-1.5">
-              <LuHeart className="w-3.5 h-3.5 text-cyan-400 fill-cyan-400 animate-bounce" /> Glass & Glow Booth
+              <LuHeart className="w-3.5 h-3.5 text-cyan-400 fill-cyan-400" /> Aesthetic Frame Photobooth
             </span>
-            <h1 className="text-lg font-black tracking-tight text-white mt-0.5">Romance Nights</h1>
+            <h1 className="text-lg font-black tracking-tight text-white mt-0.5">Lace & Glass Romance</h1>
           </div>
-          <div className="w-10 h-10 rounded-2xl bg-cyan-950/60 border border-cyan-400/40 flex items-center justify-center text-cyan-300 shadow-inner backdrop-blur-md">
+          <div className="w-10 h-10 rounded-2xl bg-cyan-950/60 border border-cyan-400/40 flex items-center justify-center text-cyan-300">
             <LuSparkles className="w-5 h-5 text-cyan-400 animate-spin" style={{ animationDuration: '8s' }} />
           </div>
         </header>
@@ -385,8 +454,8 @@ const Home = () => {
           </div>
         </div>
 
-        {/* 4:3 Camera Viewfinder */}
-        <div className="relative rounded-3xl overflow-hidden bg-slate-950 shadow-2xl border border-cyan-500/30 aspect-[4/3] flex items-center justify-center backdrop-blur-sm">
+        {/* Camera Viewfinder */}
+        <div className="relative rounded-3xl overflow-hidden bg-slate-950 shadow-2xl border border-cyan-500/30 aspect-[4/3] flex items-center justify-center">
           {cameraError ? (
             <div className="p-6 text-center space-y-3">
               <p className="text-cyan-400 text-xs font-semibold">Camera Access Error</p>
@@ -406,13 +475,6 @@ const Home = () => {
               style={{ filter: selectedFilter.css }}
               className="w-full h-full object-cover scale-x-[-1] transition-all duration-300"
             />
-          )}
-
-          {selectedSticker.symbol && !cameraError && (
-            <div className="absolute top-3 left-4 right-4 flex justify-between pointer-events-none text-cyan-200 text-xl">
-              <span>{selectedSticker.symbol}</span>
-              <span>{selectedSticker.symbol}</span>
-            </div>
           )}
 
           {countdown && (
@@ -466,50 +528,30 @@ const Home = () => {
               </div>
             </div>
 
-            {/* Icon Stamps */}
+            {/* 6 Aesthetic Frame Textures Selector */}
             <div className="space-y-2">
               <h3 className="text-xs font-bold uppercase tracking-wider text-cyan-300/80 flex items-center gap-1.5 px-1">
-                <LuSmile className="w-4 h-4 text-cyan-400" /> Cute Icon Overlay
+                <LuLayers className="w-4 h-4 text-cyan-400" /> 6 Aesthetic Frame Textures
               </h3>
-              <div className="flex gap-2.5 overflow-x-auto pb-2 pt-1 px-1 scrollbar-thin scrollbar-thumb-cyan-950">
-                {STICKERS.map((stk) => (
+              <div className="grid grid-cols-2 gap-2.5 px-1">
+                {FRAME_TEXTURES.map((frame) => (
                   <button
-                    key={stk.id}
-                    onClick={() => setSelectedSticker(stk)}
-                    className={`px-4 py-2.5 rounded-2xl text-xs font-semibold border transition-all flex items-center gap-2 shrink-0 ${
-                      selectedSticker.id === stk.id
-                        ? 'border-cyan-400 bg-cyan-950/80 text-cyan-200 shadow-md backdrop-blur-md'
-                        : 'border-cyan-500/10 bg-slate-900/40 text-slate-400 hover:text-cyan-200'
+                    key={frame.id}
+                    onClick={() => setSelectedFrame(frame)}
+                    className={`p-3 rounded-2xl text-left border transition-all relative overflow-hidden ${
+                      selectedFrame.id === frame.id
+                        ? 'border-cyan-400 bg-cyan-950/80 shadow-md ring-1 ring-cyan-400'
+                        : 'border-cyan-500/10 bg-slate-900/40 hover:border-cyan-500/30'
                     }`}
                   >
-                    <span className="text-base">{stk.symbol}</span>
-                    {stk.name}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Cyan & Vintage Glass Themes */}
-            <div className="space-y-2">
-              <h3 className="text-xs font-bold uppercase tracking-wider text-cyan-300/80 flex items-center gap-1.5 px-1">
-                <LuImage className="w-4 h-4 text-cyan-400" /> Glass & Romance Themes
-              </h3>
-              <div className="flex gap-2.5 overflow-x-auto pb-2 pt-1 px-1 scrollbar-thin scrollbar-thumb-cyan-950">
-                {THEMES.map((theme) => (
-                  <button
-                    key={theme.id}
-                    onClick={() => setSelectedTheme(theme)}
-                    className={`px-4 py-2.5 rounded-2xl text-xs font-semibold border transition-all flex items-center gap-2 shrink-0 ${
-                      selectedTheme.id === theme.id
-                        ? 'border-cyan-400 bg-cyan-950/80 text-cyan-200 shadow-md backdrop-blur-md'
-                        : 'border-cyan-500/10 bg-slate-900/40 text-slate-400 hover:text-cyan-200'
-                    }`}
-                  >
-                    <span
-                      className="w-3.5 h-3.5 rounded-full border border-white/20 shadow-sm"
-                      style={{ backgroundColor: theme.bg }}
-                    />
-                    {theme.name}
+                    <div className="flex items-center gap-2 mb-1">
+                      <span
+                        className="w-3.5 h-3.5 rounded-full border border-white/30"
+                        style={{ backgroundColor: frame.border }}
+                      />
+                      <span className="text-xs font-bold text-white">{frame.name}</span>
+                    </div>
+                    <p className="text-[10px] text-slate-400 leading-tight">{frame.description}</p>
                   </button>
                 ))}
               </div>
@@ -533,26 +575,27 @@ const Home = () => {
             <div
               className="p-4 rounded-3xl border shadow-2xl space-y-3 relative overflow-hidden backdrop-blur-md"
               style={{
-                backgroundColor: selectedTheme.bg,
-                borderColor: selectedTheme.border,
-                color: selectedTheme.text,
+                backgroundColor: selectedFrame.bg,
+                borderColor: selectedFrame.border,
+                color: selectedFrame.text,
               }}
             >
-              <div className="text-center text-[11px] uppercase font-extrabold tracking-widest opacity-80 flex items-center justify-center gap-2">
-                <span>{selectedSticker.symbol}</span>
-                <span>LOVEBIRDS PHOTOBOOTH</span>
-                <span>{selectedSticker.symbol}</span>
+              <div className="text-center text-[11px] font-serif font-bold uppercase tracking-widest opacity-80">
+                LOVEBIRDS PHOTOBOOTH
               </div>
 
               {/* 2 Columns Double Strip Display */}
               <div className="grid grid-cols-2 gap-3">
                 {/* Strip 1 */}
-                <div className="space-y-2 p-1.5 border border-white/10 rounded-2xl bg-black/20">
+                <div
+                  className="space-y-2 p-2 border rounded-2xl relative"
+                  style={{ borderColor: selectedFrame.border, backgroundColor: 'rgba(0,0,0,0.2)' }}
+                >
                   {photos.map((src, i) => (
                     <div
                       key={`col1-${i}`}
-                      className="p-1 rounded-xl shadow-sm overflow-hidden relative aspect-[4/3]"
-                      style={{ backgroundColor: selectedTheme.photoBg }}
+                      className="p-1 rounded-xl shadow-sm overflow-hidden border aspect-[4/3]"
+                      style={{ backgroundColor: selectedFrame.photoBg, borderColor: selectedFrame.border }}
                     >
                       <img
                         src={src}
@@ -565,18 +608,21 @@ const Home = () => {
                   <div className="text-center pt-1.5">
                     <p className="text-xs font-serif font-bold tracking-wide">{coupleNames}</p>
                     <p className="text-[9px] opacity-70 mt-0.5">
-                      • MOMENTS IN LOVE • {new Date().toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' })}
+                      MOMENTS IN LOVE • {new Date().toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' })}
                     </p>
                   </div>
                 </div>
 
                 {/* Strip 2 */}
-                <div className="space-y-2 p-1.5 border border-white/10 rounded-2xl bg-black/20">
+                <div
+                  className="space-y-2 p-2 border rounded-2xl relative"
+                  style={{ borderColor: selectedFrame.border, backgroundColor: 'rgba(0,0,0,0.2)' }}
+                >
                   {photos.map((src, i) => (
                     <div
                       key={`col2-${i}`}
-                      className="p-1 rounded-xl shadow-sm overflow-hidden relative aspect-[4/3]"
-                      style={{ backgroundColor: selectedTheme.photoBg }}
+                      className="p-1 rounded-xl shadow-sm overflow-hidden border aspect-[4/3]"
+                      style={{ backgroundColor: selectedFrame.photoBg, borderColor: selectedFrame.border }}
                     >
                       <img
                         src={src}
@@ -589,7 +635,7 @@ const Home = () => {
                   <div className="text-center pt-1.5">
                     <p className="text-xs font-serif font-bold tracking-wide">{coupleNames}</p>
                     <p className="text-[9px] opacity-70 mt-0.5">
-                      • MOMENTS IN LOVE • {new Date().toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' })}
+                      MOMENTS IN LOVE • {new Date().toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' })}
                     </p>
                   </div>
                 </div>
@@ -614,7 +660,7 @@ const Home = () => {
           </div>
         )}
 
-        {/* Gallery */}
+        {/* Saved Gallery */}
         {savedGallery.length > 0 && (
           <section className="pt-5 border-t border-cyan-500/20 space-y-3">
             <h3 className="text-xs font-bold uppercase tracking-wider text-cyan-300/80 px-1">
