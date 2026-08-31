@@ -11,122 +11,107 @@ import {
   LuTrash2
 } from 'react-icons/lu';
 
-// Decorative Sticker Graphic Component (SVG Sticker Icons - No Emoji)
-const StickerDecoration = ({ type, color }) => {
-  switch (type) {
-    case 'bear':
-      return (
-        <svg className="w-5 h-5 inline-block" viewBox="0 0 24 24" fill={color}>
-          <circle cx="7" cy="6" r="3" />
-          <circle cx="17" cy="6" r="3" />
-          <path d="M12 8c-4.4 0-8 3.6-8 8v2c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-2c0-4.4-3.6-8-8-8z" />
-          <circle cx="10" cy="13" r="1" fill="#000" />
-          <circle cx="14" cy="13" r="1" fill="#000" />
-          <ellipse cx="12" cy="15" rx="1.5" ry="1" fill="#000" />
-        </svg>
-      );
-    case 'fish':
-      return (
-        <svg className="w-5 h-5 inline-block" viewBox="0 0 24 24" fill={color}>
-          <path d="M12 6c-4.4 0-8 2.7-8 6s3.6 6 8 6c2.2 0 4.2-7 8-6-3.8 1-5.8-6-8-6z" />
-          <circle cx="8" cy="11" r="1" fill="#000" />
-        </svg>
-      );
-    case 'sparkle':
-      return (
-        <svg className="w-4 h-4 inline-block animate-pulse" viewBox="0 0 24 24" fill={color}>
-          <path d="M12 2l2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4z" />
-        </svg>
-      );
-    case 'heart':
-      return (
-        <svg className="w-4 h-4 inline-block" viewBox="0 0 24 24" fill={color}>
-          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-        </svg>
-      );
-    case 'bow':
-      return (
-        <svg className="w-5 h-5 inline-block" viewBox="0 0 24 24" fill={color}>
-          <path d="M12 10c-1.5-2-4.5-3.5-7-2 0 0 .5 3 3 4.5 2.5 1.5 4 1 4 1s-1.5 2.5-4 1c-2.5-1.5-3 4.5-3 4.5 2.5 1.5 5.5 0 7-2 1.5 2 4.5 3.5 7 2 0 0-.5-3-3-4.5-2.5-1.5-4-1-4-1s1.5-2.5 4-1c2.5 1.5 3-4.5 3-4.5-2.5-1.5-5.5 0-7 2z" />
-          <circle cx="12" cy="11.5" r="2" fill="#fff" />
-        </svg>
-      );
-    default:
-      return null;
-  }
-};
-
-// 6 Frame Templates with Customized Graphic Sticker Accents
+// 8 Aesthetic Soft-Tone Photobooth Frame Templates
 const FRAME_TEMPLATES = [
   {
-    id: 'cyan-glass-stickers',
-    name: 'Cyan Glass & Cute Bears',
-    bg: '#041826',
-    stripBg: '#092A3D',
-    photoBg: '#0E3B54',
-    text: '#38BDF8',
-    border: '#0EA5E9',
-    stickers: ['bear', 'fish', 'sparkle'],
-    description: 'Dark Cyan Glass with Cute Bear & Fish Graphic Icons'
+    id: 'soft-lavender-doodle',
+    name: 'Lavender Doodle Dream',
+    bg: '#E9D5FF',
+    stripBg: '#F3E8FF',
+    photoBg: '#FFFFFF',
+    text: '#6B21A8',
+    border: '#C084FC',
+    theme: 'lavender',
+    pattern: 'plaid',
+    description: 'Soft Lilac Purple with Heart Doodles & Plaid Footer'
   },
   {
-    id: 'pastel-mint-fish',
-    name: 'Mint Fish & Bubbles',
-    bg: '#0D2626',
-    stripBg: '#133D3B',
-    photoBg: '#1C5450',
-    text: '#A7F3D0',
-    border: '#2DD4BF',
-    stickers: ['fish', 'sparkle', 'heart'],
-    description: 'Pastel Mint Theme with Floating Fish & Sparkles'
+    id: 'natural-sage-green',
+    name: 'Natural Sage Garden',
+    bg: '#DCECE6',
+    stripBg: '#EAF5F1',
+    photoBg: '#FFFFFF',
+    text: '#2D5A4C',
+    border: '#A3D0C3',
+    theme: 'sage',
+    pattern: 'botanical',
+    description: 'Earthy Sage Green with Leaves & Cute Daisies'
   },
   {
-    id: 'sweet-pink-ribbon',
-    name: 'Sweet Pink Bows',
-    bg: '#240F20',
-    stripBg: '#3B1533',
-    photoBg: '#521D47',
-    text: '#F472B6',
-    border: '#F43F5E',
-    stickers: ['bow', 'heart', 'sparkle'],
-    description: 'Soft Pink Ribbon Bows & Cute Graphic Hearts'
+    id: 'vintage-warm-beige',
+    name: 'Warm Aesthetic Beige',
+    bg: '#F7EFE5',
+    stripBg: '#FFFDF9',
+    photoBg: '#FFFFFF',
+    text: '#78350F',
+    border: '#E6D2B8',
+    theme: 'vintage',
+    pattern: 'dots',
+    description: 'Soft Butter Cream with Minimal Lace & Bow Accents'
   },
   {
-    id: 'starry-cloud-sky',
-    name: 'Sky Blue Cloud & Stars',
-    bg: '#091E36',
-    stripBg: '#103254',
-    photoBg: '#174570',
-    text: '#7DD3FC',
-    border: '#38BDF8',
-    stickers: ['sparkle', 'bear', 'heart'],
-    description: 'Cute Sky Clouds & Glowing Little Star Stickers'
+    id: 'romance-pastel-pink',
+    name: 'Blush Romance Pink',
+    bg: '#FCE7F3',
+    stripBg: '#FDFAFC',
+    photoBg: '#FFFFFF',
+    text: '#9D174D',
+    border: '#F472B6',
+    theme: 'pink',
+    pattern: 'hearts',
+    description: 'Sweet Pastel Pink with Bow Ribbons & Tiny Hearts'
   },
   {
-    id: 'minimal-cream-card',
-    name: 'Minimal Aesthetic White',
-    bg: '#08141F',
-    stripBg: '#F8FAFC',
+    id: 'galaxy-cosmic-night',
+    name: 'Cosmic Galaxy Night',
+    bg: '#1E1B4B',
+    stripBg: '#2E2A72',
     photoBg: '#0F172A',
-    text: '#0F172A',
-    border: '#94A3B8',
-    stickers: ['heart', 'sparkle', 'bow'],
-    description: 'Clean White Photobooth Card with Subtle Details'
+    text: '#C7D2FE',
+    border: '#818CF8',
+    theme: 'galaxy',
+    pattern: 'stars',
+    description: 'Deep Cosmic Blue with Stars & Crescent Moon'
   },
   {
-    id: 'deep-purple-romance',
-    name: 'Deep Purple Aesthetic',
-    bg: '#160C26',
-    stripBg: '#271442',
-    photoBg: '#381C5C',
-    text: '#E9D5FF',
-    border: '#A855F7',
-    stickers: ['bow', 'bear', 'sparkle'],
-    description: 'Modern Dark Purple with Delicate Graphic Accents'
+    id: 'monochrome-classic-bw',
+    name: 'Monochrome Noir B&W',
+    bg: '#18181B',
+    stripBg: '#27272A',
+    photoBg: '#09090B',
+    text: '#F4F4F5',
+    border: '#71717A',
+    theme: 'monochrome',
+    pattern: 'film',
+    description: 'High Contrast Black & White Film Perforations'
+  },
+  {
+    id: 'cyber-ice-glass',
+    name: 'Cyber Ice Glossy',
+    bg: '#E0F2FE',
+    stripBg: '#F0F9FF',
+    photoBg: '#FFFFFF',
+    text: '#0369A1',
+    border: '#38BDF8',
+    theme: 'cyber',
+    pattern: 'bubbles',
+    description: 'Translucent Light Ice Blue with Floating Bubbles'
+  },
+  {
+    id: 'modern-classic-stamp',
+    name: 'Modern Vintage Classic',
+    bg: '#F1F5F9',
+    stripBg: '#FFFFFF',
+    photoBg: '#F8FAFC',
+    text: '#334155',
+    border: '#94A3B8',
+    theme: 'classic',
+    pattern: 'stamps',
+    description: 'Clean Minimal Slate with Retro Stamp & Frame Edges'
   }
 ];
 
-// Photo Filter Effects (Glow, Cutie, Vintage, Black & White)
+// Photo Filter Effects
 const IMAGE_FILTERS = [
   { 
     id: 'porcelain-glow', 
@@ -136,19 +121,19 @@ const IMAGE_FILTERS = [
   },
   { 
     id: 'cutie-pink', 
-    name: 'Cutie Pink', 
+    name: 'Cutie Warm', 
     css: 'brightness(114%) contrast(98%) saturate(125%) hue-rotate(-12deg)', 
     canvasFilter: 'brightness(114%) contrast(98%) saturate(125%) hue-rotate(-12deg)' 
   },
   { 
-    id: 'vintage-warm', 
-    name: 'Vintage Film', 
+    id: 'vintage-film', 
+    name: 'Vintage Touch', 
     css: 'brightness(106%) contrast(102%) saturate(120%) sepia(25%) hue-rotate(-6deg)', 
     canvasFilter: 'brightness(106%) contrast(102%) saturate(120%) sepia(25%) hue-rotate(-6deg)' 
   },
   { 
     id: 'black-white', 
-    name: 'Black & White', 
+    name: 'Monochrome B&W', 
     css: 'grayscale(100%) brightness(110%) contrast(110%)', 
     canvasFilter: 'grayscale(100%) brightness(110%) contrast(110%)' 
   }
@@ -156,6 +141,42 @@ const IMAGE_FILTERS = [
 
 // Timer Delays
 const TIMER_OPTIONS = [3, 5, 10, 20, 30];
+
+// SVG Graphic Elements Component for Photo Booth UI
+const FrameGraphicIcon = ({ type, color }) => {
+  switch (type) {
+    case 'lavender':
+      return (
+        <svg className="w-4 h-4" viewBox="0 0 24 24" fill={color}>
+          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+        </svg>
+      );
+    case 'sage':
+      return (
+        <svg className="w-4 h-4" viewBox="0 0 24 24" fill={color}>
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+        </svg>
+      );
+    case 'galaxy':
+      return (
+        <svg className="w-4 h-4 animate-pulse" viewBox="0 0 24 24" fill={color}>
+          <path d="M12 2l2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4z" />
+        </svg>
+      );
+    case 'pink':
+      return (
+        <svg className="w-4 h-4" viewBox="0 0 24 24" fill={color}>
+          <path d="M12 10c-1.5-2-4.5-3.5-7-2 0 0 .5 3 3 4.5 2.5 1.5 4 1 4 1s-1.5 2.5-4 1c-2.5-1.5-3 4.5-3 4.5 2.5 1.5 5.5 0 7-2 1.5 2 4.5 3.5 7 2 0 0-.5-3-3-4.5-2.5-1.5-4-1-4-1s1.5-2.5 4-1c2.5 1.5 3-4.5 3-4.5-2.5-1.5-5.5 0-7 2z" />
+        </svg>
+      );
+    default:
+      return (
+        <svg className="w-4 h-4" viewBox="0 0 24 24" fill={color}>
+          <circle cx="12" cy="12" r="8" />
+        </svg>
+      );
+  }
+};
 
 const Home = () => {
   const [photos, setPhotos] = useState([]);
@@ -173,7 +194,7 @@ const Home = () => {
   const canvasRef = useRef(null);
 
   useEffect(() => {
-    const localData = localStorage.getItem('dark_cyan_booth_gallery');
+    const localData = localStorage.getItem('soft_aesthetic_booth_gallery');
     if (localData) setSavedGallery(JSON.parse(localData));
   }, []);
 
@@ -270,41 +291,49 @@ const Home = () => {
     setIsCapturing(false);
   };
 
-  // Canvas Native Vector Graphic Sticker Art Renderer
-  const drawStickersOnCanvas = (ctx, x, y, width, height, color) => {
+  // Canvas Native Graphics Drawing (Stickers & Patterns)
+  const drawCanvasDecorations = (ctx, x, y, width, height, frame) => {
     ctx.save();
-    ctx.fillStyle = color;
-    ctx.strokeStyle = color;
+    ctx.fillStyle = frame.border;
+    ctx.strokeStyle = frame.border;
 
-    // Bear Sticker Top Left
-    ctx.beginPath();
-    ctx.arc(x + 24, y + 20, 7, 0, Math.PI * 2);
-    ctx.arc(x + 40, y + 20, 7, 0, Math.PI * 2);
-    ctx.fill();
+    // Draw Footer Plaid Pattern if selected
+    if (frame.pattern === 'plaid') {
+      ctx.globalAlpha = 0.2;
+      for (let i = 0; i < width; i += 12) {
+        ctx.fillRect(x + i, y + height - 80, 6, 80);
+      }
+      for (let j = 0; j < 80; j += 12) {
+        ctx.fillRect(x, y + height - 80 + j, width, 6);
+      }
+      ctx.globalAlpha = 1.0;
+    }
 
-    // Fish Sticker Top Right
-    ctx.beginPath();
-    ctx.ellipse(x + width - 30, y + 22, 9, 5, 0, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.beginPath();
-    ctx.moveTo(x + width - 21, y + 22);
-    ctx.lineTo(x + width - 13, y + 17);
-    ctx.lineTo(x + width - 13, y + 27);
-    ctx.closePath();
-    ctx.fill();
-
-    // Sparkles
-    const drawSparkle = (sx, sy) => {
+    // Draw Decorative Stickers
+    const drawHeart = (hx, hy) => {
       ctx.beginPath();
-      ctx.moveTo(sx, sy - 8);
-      ctx.quadraticCurveTo(sx, sy, sx + 8, sy);
-      ctx.quadraticCurveTo(sx, sy, sx, sy + 8);
-      ctx.quadraticCurveTo(sx, sy, sx - 8, sy);
-      ctx.quadraticCurveTo(sx, sy, sx, sy - 8);
+      ctx.arc(hx - 3, hy - 3, 3, Math.PI, 0, false);
+      ctx.arc(hx + 3, hy - 3, 3, Math.PI, 0, false);
+      ctx.lineTo(hx, hy + 5);
+      ctx.closePath();
       ctx.fill();
     };
-    drawSparkle(x + 55, y + 22);
-    drawSparkle(x + width - 55, y + 22);
+
+    const drawSparkle = (sx, sy) => {
+      ctx.beginPath();
+      ctx.moveTo(sx, sy - 6);
+      ctx.quadraticCurveTo(sx, sy, sx + 6, sy);
+      ctx.quadraticCurveTo(sx, sy, sx, sy + 6);
+      ctx.quadraticCurveTo(sx, sy, sx - 6, sy);
+      ctx.quadraticCurveTo(sx, sy, sx, sy - 6);
+      ctx.fill();
+    };
+
+    // Place Stickers at Corner Header
+    drawHeart(x + 20, y + 22);
+    drawHeart(x + width - 20, y + 22);
+    drawSparkle(x + 40, y + 22);
+    drawSparkle(x + width - 40, y + 22);
 
     ctx.restore();
   };
@@ -339,7 +368,7 @@ const Home = () => {
     const col2X = outerMargin + colWidth + gapBetweenCols;
     const stripHeight = totalHeight - outerMargin * 2;
 
-    // Draw Strips Background
+    // Draw Strips
     ctx.fillStyle = selectedFrame.stripBg;
     ctx.fillRect(col1X, col1Y, colWidth, stripHeight);
     ctx.strokeStyle = selectedFrame.border;
@@ -349,9 +378,9 @@ const Home = () => {
     ctx.fillRect(col2X, col1Y, colWidth, stripHeight);
     ctx.strokeRect(col2X, col1Y, colWidth, stripHeight);
 
-    // Draw Vector Stickers
-    drawStickersOnCanvas(ctx, col1X, col1Y, colWidth, stripHeight, selectedFrame.border);
-    drawStickersOnCanvas(ctx, col2X, col1Y, colWidth, stripHeight, selectedFrame.border);
+    // Render Stickers & Aesthetic Details
+    drawCanvasDecorations(ctx, col1X, col1Y, colWidth, stripHeight, selectedFrame);
+    drawCanvasDecorations(ctx, col2X, col1Y, colWidth, stripHeight, selectedFrame);
 
     // Header Text
     ctx.fillStyle = selectedFrame.text;
@@ -374,7 +403,7 @@ const Home = () => {
       img.onload = () => {
         const yPos = col1Y + headerHeight + index * (photoHeight + photoGap);
 
-        // Strip 1 Photo
+        // Photo 1 Left Strip
         const col1PhotoX = col1X + (colWidth - photoWidth) / 2;
         ctx.fillStyle = selectedFrame.photoBg;
         ctx.fillRect(col1PhotoX - 4, yPos - 4, photoWidth + 8, photoHeight + 8);
@@ -384,7 +413,7 @@ const Home = () => {
         ctx.drawImage(img, col1PhotoX, yPos, photoWidth, photoHeight);
         ctx.restore();
 
-        // Strip 2 Photo
+        // Photo 2 Right Strip
         const col2PhotoX = col2X + (colWidth - photoWidth) / 2;
         ctx.fillStyle = selectedFrame.photoBg;
         ctx.fillRect(col2PhotoX - 4, yPos - 4, photoWidth + 8, photoHeight + 8);
@@ -414,11 +443,11 @@ const Home = () => {
           ctx.fillText(`MOMENTS IN LOVE • ${today}`, col2CenterX, totalHeight - outerMargin - footerHeight / 2 + 22);
           ctx.globalAlpha = 1.0;
 
-          // Reliable Instant PNG Download
+          // Reliable PNG Image Download Trigger
           setTimeout(() => {
             const dataUrl = canvas.toDataURL('image/png');
             const link = document.createElement('a');
-            link.download = `cyan-aesthetic-strip-${Date.now()}.png`;
+            link.download = `soft-photobooth-${Date.now()}.png`;
             link.href = dataUrl;
             document.body.appendChild(link);
             link.click();
@@ -426,7 +455,7 @@ const Home = () => {
 
             const updatedGallery = [{ id: Date.now(), image: dataUrl, date: today, coupleNames }, ...savedGallery];
             setSavedGallery(updatedGallery);
-            localStorage.setItem('dark_cyan_booth_gallery', JSON.stringify(updatedGallery));
+            localStorage.setItem('soft_aesthetic_booth_gallery', JSON.stringify(updatedGallery));
           }, 100);
         }
       };
@@ -436,35 +465,35 @@ const Home = () => {
   const deleteMemory = (id) => {
     const filtered = savedGallery.filter((item) => item.id !== id);
     setSavedGallery(filtered);
-    localStorage.setItem('dark_cyan_booth_gallery', JSON.stringify(filtered));
+    localStorage.setItem('soft_aesthetic_booth_gallery', JSON.stringify(filtered));
   };
 
   return (
-    <div className="min-h-screen bg-[#031726] text-cyan-50 font-sans pb-28 px-3 sm:px-4 pt-4 sm:pt-6 relative overflow-x-hidden">
-      {/* Background Glassmorphism Ambient Glow */}
+    <div className="min-h-screen bg-[#0F172A] text-slate-100 font-sans pb-28 px-3 sm:px-4 pt-4 sm:pt-6 relative overflow-x-hidden">
+      {/* Background Subtle Ambient Glow */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
-        <div className="absolute -top-20 -left-20 w-80 h-80 bg-cyan-500/20 rounded-full blur-[140px] animate-pulse" />
-        <div className="absolute top-1/2 -right-20 w-80 h-80 bg-teal-500/15 rounded-full blur-[140px]" />
+        <div className="absolute -top-20 -left-20 w-80 h-80 bg-purple-500/10 rounded-full blur-[140px] animate-pulse" />
+        <div className="absolute top-1/2 -right-20 w-80 h-80 bg-teal-500/10 rounded-full blur-[140px]" />
       </div>
 
       <div className="relative z-10 max-w-md mx-auto space-y-4 sm:space-y-5">
-        {/* Main Header Glass Panel */}
-        <header className="bg-cyan-950/40 backdrop-blur-xl border border-cyan-500/30 p-4 rounded-3xl shadow-xl flex justify-between items-center">
+        {/* Main Soft Dark Header Panel */}
+        <header className="bg-slate-900/60 backdrop-blur-xl border border-slate-700/40 p-4 rounded-3xl shadow-xl flex justify-between items-center">
           <div>
-            <span className="text-[10px] font-extrabold uppercase tracking-widest text-cyan-400 flex items-center gap-1.5">
-              <LuSparkles className="w-3.5 h-3.5 text-cyan-400" /> Aesthetic Photobooth
+            <span className="text-[10px] font-extrabold uppercase tracking-widest text-slate-400 flex items-center gap-1.5">
+              <LuSparkles className="w-3.5 h-3.5 text-purple-400" /> Aesthetic Photobooth Studio
             </span>
-            <h1 className="text-base sm:text-lg font-black tracking-tight text-white mt-0.5">Dark Cyan Glass Studio</h1>
+            <h1 className="text-base sm:text-lg font-black tracking-tight text-white mt-0.5">Life4Cuts Soft Studio</h1>
           </div>
-          <div className="w-10 h-10 rounded-2xl bg-cyan-900/40 border border-cyan-400/30 flex items-center justify-center text-cyan-300 shadow-inner">
-            <LuSparkles className="w-5 h-5 text-cyan-400" />
+          <div className="w-10 h-10 rounded-2xl bg-slate-800/60 border border-slate-700/50 flex items-center justify-center text-purple-300 shadow-inner">
+            <LuSparkles className="w-5 h-5 text-purple-400" />
           </div>
         </header>
 
         {/* Timer Control Bar (3s, 5s, 10s, 20s, 30s) */}
-        <div className="bg-cyan-950/40 backdrop-blur-xl p-3.5 rounded-2xl border border-cyan-500/20 shadow-lg flex items-center justify-between">
-          <span className="text-xs font-bold uppercase tracking-wider text-cyan-300 flex items-center gap-1.5 shrink-0">
-            <LuTimer className="w-4 h-4 text-cyan-400" /> Timer Delay:
+        <div className="bg-slate-900/60 backdrop-blur-xl p-3.5 rounded-2xl border border-slate-700/40 shadow-lg flex items-center justify-between">
+          <span className="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1.5 shrink-0">
+            <LuTimer className="w-4 h-4 text-purple-400" /> Timer Delay:
           </span>
           <div className="flex gap-1.5 overflow-x-auto py-0.5 scrollbar-none">
             {TIMER_OPTIONS.map((sec) => (
@@ -474,8 +503,8 @@ const Home = () => {
                 onClick={() => setSelectedTimer(sec)}
                 className={`px-2.5 py-1.5 rounded-xl text-xs font-black transition-all shrink-0 ${
                   selectedTimer === sec
-                    ? 'bg-cyan-400 text-white shadow-lg shadow-cyan-400/30 border border-cyan-200'
-                    : 'bg-cyan-950/60 text-cyan-300/60 border border-cyan-500/10 hover:text-cyan-200'
+                    ? 'bg-purple-500 text-white shadow-lg shadow-purple-500/30 border border-purple-300'
+                    : 'bg-slate-800/60 text-slate-400 border border-slate-700/30 hover:text-slate-200'
                 }`}
               >
                 {sec}s
@@ -485,13 +514,13 @@ const Home = () => {
         </div>
 
         {/* Viewfinder Camera Box */}
-        <div className="relative rounded-3xl overflow-hidden bg-slate-950 shadow-2xl border border-cyan-500/30 aspect-[4/3] flex items-center justify-center">
+        <div className="relative rounded-3xl overflow-hidden bg-slate-950 shadow-2xl border border-slate-800 aspect-[4/3] flex items-center justify-center">
           {cameraError ? (
             <div className="p-6 text-center space-y-3">
-              <p className="text-cyan-400 text-xs font-semibold">Camera Access Failed</p>
+              <p className="text-purple-400 text-xs font-semibold">Camera Access Failed</p>
               <button
                 onClick={startCamera}
-                className="px-4 py-2 bg-cyan-950 text-xs text-cyan-200 rounded-xl border border-cyan-500/30"
+                className="px-4 py-2 bg-slate-800 text-xs text-slate-200 rounded-xl border border-slate-700"
               >
                 Retry Camera
               </button>
@@ -509,7 +538,7 @@ const Home = () => {
 
           {countdown && (
             <div className="absolute inset-0 bg-slate-950/80 backdrop-blur-md flex items-center justify-center z-20">
-              <span className="text-cyan-400 text-6xl font-black tracking-widest animate-ping">
+              <span className="text-purple-400 text-6xl font-black tracking-widest animate-ping">
                 {countdown}
               </span>
             </div>
@@ -523,7 +552,7 @@ const Home = () => {
                 className={`w-full max-w-xs py-3 rounded-2xl font-black text-xs flex items-center justify-center gap-2 shadow-xl border transition-all ${
                   isCapturing
                     ? 'bg-slate-900 border-slate-800 text-slate-500 cursor-not-allowed'
-                    : 'bg-cyan-400 hover:bg-cyan-300 text-slate-950 border-cyan-200 shadow-cyan-400/30 active:scale-95'
+                    : 'bg-purple-500 hover:bg-purple-400 text-white border-purple-300 shadow-purple-500/30 active:scale-95'
                 }`}
               >
                 <LuCamera className="w-4.5 h-4.5" />
@@ -535,21 +564,21 @@ const Home = () => {
 
         {/* Customization Options */}
         {photos.length === 4 && (
-          <div className="space-y-4 pt-2 border-t border-cyan-500/20">
-            {/* 4 Custom Photo Filters with Clean Scrollbar Padding */}
+          <div className="space-y-4 pt-2 border-t border-slate-800">
+            {/* Filter Selection */}
             <div className="space-y-2">
-              <h3 className="text-xs font-bold uppercase tracking-wider text-cyan-300/80 flex items-center gap-1.5 px-1">
-                <LuSlidersHorizontal className="w-4 h-4 text-cyan-400" /> Photo Effects
+              <h3 className="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1.5 px-1">
+                <LuSlidersHorizontal className="w-4 h-4 text-purple-400" /> Photo Effects
               </h3>
-              <div className="flex gap-2.5 overflow-x-auto py-2 px-1 scrollbar-thin scrollbar-thumb-cyan-900 scrollbar-track-transparent">
+              <div className="flex gap-2.5 overflow-x-auto py-2 px-1 scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-transparent">
                 {IMAGE_FILTERS.map((filter) => (
                   <button
                     key={filter.id}
                     onClick={() => setSelectedFilter(filter)}
                     className={`px-4 py-2 rounded-2xl text-xs font-semibold border transition-all shrink-0 ${
                       selectedFilter.id === filter.id
-                        ? 'border-cyan-400 bg-cyan-900/80 text-cyan-200 shadow-md backdrop-blur-md'
-                        : 'border-cyan-500/10 bg-cyan-950/40 text-slate-400 hover:text-cyan-200'
+                        ? 'border-purple-400 bg-purple-900/40 text-purple-200 shadow-md backdrop-blur-md'
+                        : 'border-slate-800 bg-slate-900/60 text-slate-400 hover:text-slate-200'
                     }`}
                   >
                     {filter.name}
@@ -558,10 +587,10 @@ const Home = () => {
               </div>
             </div>
 
-            {/* Frame Templates */}
+            {/* 8 Aesthetic Frame Templates Selector */}
             <div className="space-y-2">
-              <h3 className="text-xs font-bold uppercase tracking-wider text-cyan-300/80 flex items-center gap-1.5 px-1">
-                <LuLayoutGrid className="w-4 h-4 text-cyan-400" /> Cute Graphic Frame Templates
+              <h3 className="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1.5 px-1">
+                <LuLayoutGrid className="w-4 h-4 text-purple-400" /> 8 Soft Aesthetic Frame Themes
               </h3>
               <div className="grid grid-cols-2 gap-2.5 px-1">
                 {FRAME_TEMPLATES.map((frame) => (
@@ -570,8 +599,8 @@ const Home = () => {
                     onClick={() => setSelectedFrame(frame)}
                     className={`p-3 rounded-2xl text-left border transition-all relative overflow-hidden ${
                       selectedFrame.id === frame.id
-                        ? 'border-cyan-400 bg-cyan-950/90 shadow-md ring-1 ring-cyan-400'
-                        : 'border-cyan-500/10 bg-cyan-950/30 hover:border-cyan-500/30'
+                        ? 'border-purple-400 bg-slate-900 shadow-md ring-1 ring-purple-400'
+                        : 'border-slate-800 bg-slate-900/40 hover:border-slate-700'
                     }`}
                   >
                     <div className="flex items-center gap-2 mb-1">
@@ -581,33 +610,29 @@ const Home = () => {
                       />
                       <span className="text-xs font-bold text-white leading-tight">{frame.name}</span>
                     </div>
-                    <div className="flex gap-1.5 mt-1.5">
-                      {frame.stickers.map((st, idx) => (
-                        <StickerDecoration key={idx} type={st} color={frame.border} />
-                      ))}
-                    </div>
+                    <p className="text-[10px] text-slate-400 leading-tight mt-1">{frame.description}</p>
                   </button>
                 ))}
               </div>
             </div>
 
             {/* Couple Name Input */}
-            <div className="bg-cyan-950/40 backdrop-blur-xl p-3.5 rounded-2xl border border-cyan-500/20 shadow-lg">
-              <label className="text-[10px] uppercase font-extrabold text-cyan-300/80 tracking-wider block mb-1.5 flex items-center gap-1">
-                <LuUser className="w-3 h-3 text-cyan-400" /> Frame Footer Names
+            <div className="bg-slate-900/60 backdrop-blur-xl p-3.5 rounded-2xl border border-slate-800 shadow-lg">
+              <label className="text-[10px] uppercase font-extrabold text-slate-400 tracking-wider block mb-1.5 flex items-center gap-1">
+                <LuUser className="w-3 h-3 text-purple-400" /> Frame Footer Text
               </label>
               <input
                 type="text"
                 value={coupleNames}
                 onChange={(e) => setCoupleNames(e.target.value)}
                 placeholder="e.g. CHLOE & LEO"
-                className="w-full text-xs bg-slate-950/80 text-cyan-100 rounded-xl px-3.5 py-2.5 border border-cyan-500/20 focus:outline-none focus:border-cyan-400 transition-colors"
+                className="w-full text-xs bg-slate-950 text-slate-100 rounded-xl px-3.5 py-2.5 border border-slate-800 focus:outline-none focus:border-purple-400 transition-colors"
               />
             </div>
 
-            {/* Live Card Preview with Graphic Stickers */}
+            {/* Live Photobooth Soft Card Preview */}
             <div
-              className="p-3.5 rounded-3xl border shadow-2xl space-y-3 relative overflow-hidden backdrop-blur-md"
+              className="p-4 rounded-3xl border shadow-2xl space-y-3 relative overflow-hidden transition-all"
               style={{
                 backgroundColor: selectedFrame.bg,
                 borderColor: selectedFrame.border,
@@ -618,7 +643,7 @@ const Home = () => {
                 LOVEBIRDS PHOTOBOOTH
               </div>
 
-              {/* Double Strips Side-by-Side */}
+              {/* Double Photo Strips */}
               <div className="grid grid-cols-2 gap-2.5">
                 {[1, 2].map((col) => (
                   <div
@@ -626,11 +651,10 @@ const Home = () => {
                     className="space-y-2 p-2.5 rounded-2xl border relative overflow-hidden"
                     style={{ backgroundColor: selectedFrame.stripBg, borderColor: selectedFrame.border }}
                   >
-                    {/* Top Sticker Accents */}
+                    {/* Frame Decorative Graphic Icons */}
                     <div className="flex justify-between items-center px-1 mb-1">
-                      {selectedFrame.stickers.map((st, idx) => (
-                        <StickerDecoration key={idx} type={st} color={selectedFrame.border} />
-                      ))}
+                      <FrameGraphicIcon type={selectedFrame.theme} color={selectedFrame.border} />
+                      <FrameGraphicIcon type={selectedFrame.theme} color={selectedFrame.border} />
                     </div>
 
                     {photos.map((src, i) => (
@@ -647,7 +671,7 @@ const Home = () => {
                         />
                       </div>
                     ))}
-                    <div className="text-center pt-1.5">
+                    <div className="text-center pt-2">
                       <p className="text-xs font-serif font-bold tracking-wide">{coupleNames}</p>
                       <p className="text-[9px] opacity-75 mt-0.5">
                         {new Date().toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' })}
@@ -662,13 +686,13 @@ const Home = () => {
             <div className="flex gap-2.5 pt-1">
               <button
                 onClick={startPhotoboothSequence}
-                className="flex-1 py-3.5 rounded-2xl bg-cyan-950/60 backdrop-blur-xl border border-cyan-500/30 text-cyan-200 font-bold text-xs flex items-center justify-center gap-1.5 hover:bg-cyan-900 transition-all active:scale-95"
+                className="flex-1 py-3.5 rounded-2xl bg-slate-900 border border-slate-700 text-slate-200 font-bold text-xs flex items-center justify-center gap-1.5 hover:bg-slate-800 transition-all active:scale-95"
               >
                 <LuRefreshCw className="w-4 h-4" /> Retake
               </button>
               <button
                 onClick={generateCanvasAndSave}
-                className="flex-2 py-3.5 rounded-2xl bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-black text-xs flex items-center justify-center gap-1.5 shadow-xl shadow-cyan-400/20 border border-cyan-200 transition-all active:scale-95"
+                className="flex-2 py-3.5 rounded-2xl bg-purple-500 hover:bg-purple-400 text-white font-black text-xs flex items-center justify-center gap-1.5 shadow-xl shadow-purple-500/20 border border-purple-300 transition-all active:scale-95"
               >
                 <LuDownload className="w-4 h-4" /> Save Photo Strip
               </button>
@@ -678,17 +702,17 @@ const Home = () => {
 
         {/* Saved Gallery */}
         {savedGallery.length > 0 && (
-          <section className="pt-4 border-t border-cyan-500/20 space-y-3">
-            <h3 className="text-xs font-bold uppercase tracking-wider text-cyan-300/80 px-1">
+          <section className="pt-4 border-t border-slate-800 space-y-3">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400 px-1">
               Saved Romance Strips
             </h3>
             <div className="grid grid-cols-2 gap-3">
               {savedGallery.map((item) => (
-                <div key={item.id} className="relative bg-cyan-950/40 backdrop-blur-xl p-2 rounded-2xl border border-cyan-500/20 shadow-lg">
+                <div key={item.id} className="relative bg-slate-900 p-2 rounded-2xl border border-slate-800 shadow-lg">
                   <img src={item.image} alt="Saved Memory" className="w-full h-auto rounded-xl" />
                   <button
                     onClick={() => deleteMemory(item.id)}
-                    className="absolute top-3 right-3 p-1.5 bg-slate-950/80 text-cyan-300 rounded-full hover:bg-rose-600 hover:text-white transition-all border border-cyan-500/20"
+                    className="absolute top-3 right-3 p-1.5 bg-slate-950/80 text-slate-300 rounded-full hover:bg-rose-600 hover:text-white transition-all border border-slate-700"
                   >
                     <LuTrash2 className="w-3.5 h-3.5" />
                   </button>
