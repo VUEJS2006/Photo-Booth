@@ -3,114 +3,114 @@ import {
   LuCamera,
   LuDownload,
   LuRefreshCw,
-  LuHeart,
   LuSlidersHorizontal,
   LuTimer,
   LuSparkles,
   LuUser,
   LuLayoutGrid,
-  LuSmile
+  LuTrash2
 } from 'react-icons/lu';
 
-// 6 Exact Match Photo Booth Frame Templates based on User Screenshot
+// 6 Aesthetic Frame Templates with Built-in Decorative Stickers
 const FRAME_TEMPLATES = [
   {
-    id: 'cute-kawaii-pastel',
+    id: 'kawaii-mint-bear',
     name: 'Kawaii Bear & Fish',
-    bg: '#E2F7E1',
-    stripBg: '#F3FCF3',
-    photoBg: '#FFFFFF',
-    text: '#2D5A27',
-    border: '#A8E6CF',
-    style: 'kawaii',
-    description: 'Pastel Green/Yellow Cute Characters (Top Left in Screenshot)'
+    bg: '#0F2B2E',
+    stripBg: '#133E43',
+    photoBg: '#1E4F55',
+    text: '#A7F3D0',
+    border: '#2DD4BF',
+    stickerTheme: 'bear-fish',
+    description: 'Pastel Mint with Cute Bear & Fish Graphic Details'
   },
   {
-    id: 'minimalist-aesthetic',
-    name: 'Minimalist Clean White',
-    bg: '#F8F9FA',
-    stripBg: '#FFFFFF',
-    photoBg: '#1A1A1A',
-    text: '#111827',
-    border: '#E5E7EB',
-    style: 'minimal',
-    description: 'Clean Elegant Aesthetic Strip with Modern Serif Font'
+    id: 'cyan-cyber-glass',
+    name: 'Cyan Glass Glow',
+    bg: '#041B2D',
+    stripBg: '#092C44',
+    photoBg: '#0F3A59',
+    text: '#38BDF8',
+    border: '#0EA5E9',
+    stickerTheme: 'cyber-sparkle',
+    description: 'Glowing Cyan Glass Borders & Floating Sparkles'
   },
   {
-    id: 'pink-heart-romance',
-    name: 'Pink Heart Romance',
-    bg: '#FFE5EC',
-    stripBg: '#FFF0F5',
-    photoBg: '#FFFFFF',
-    text: '#D90429',
-    border: '#FFB3C1',
-    style: 'pink-hearts',
-    description: 'Sweet Pink Love Hearts & Bow Ribbon'
+    id: 'sweet-pink-bow',
+    name: 'Sweet Pink Ribbon',
+    bg: '#251020',
+    stripBg: '#3C1733',
+    photoBg: '#541F48',
+    text: '#F472B6',
+    border: '#F43F5E',
+    stickerTheme: 'pink-heart',
+    description: 'Lovely Pink Bow Ribbons & Small Heart Stickers'
   },
   {
-    id: 'classic-film-black',
-    name: 'Classic Black Strip',
-    bg: '#121212',
-    stripBg: '#1A1A1A',
-    photoBg: '#000000',
-    text: '#FFFFFF',
-    border: '#333333',
-    style: 'film-black',
-    description: 'Pure Black Aesthetic Photo Booth Frame'
+    id: 'pastel-star-cloud',
+    name: 'Sky Cloud & Stars',
+    bg: '#0A2136',
+    stripBg: '#123454',
+    photoBg: '#1A456E',
+    text: '#7DD3FC',
+    border: '#38BDF8',
+    stickerTheme: 'star-cloud',
+    description: 'Cute Sky Clouds & Little Glowing Stars'
   },
   {
-    id: 'anniversary-purple',
+    id: 'midnight-minimal-white',
+    name: 'Minimal Aesthetic White',
+    bg: '#09151F',
+    stripBg: '#F8FAFC',
+    photoBg: '#0F172A',
+    text: '#0F172A',
+    border: '#94A3B8',
+    stickerTheme: 'minimal-sparkle',
+    description: 'Clean White Photobooth Card with Subtle Dots'
+  },
+  {
+    id: 'deep-purple-anniversary',
     name: 'Deep Purple Romance',
-    bg: '#1E1B4B',
-    stripBg: '#2E2A62',
-    photoBg: '#0F0D23',
-    text: '#E0E7FF',
-    border: '#6366F1',
-    style: 'purple-gold',
-    description: 'Elegant Dark Purple Anniversary Style'
-  },
-  {
-    id: 'sky-blue-aesthetic',
-    name: 'Sky Blue Cloud',
-    bg: '#E0F2FE',
-    stripBg: '#F0F9FF',
-    photoBg: '#FFFFFF',
-    text: '#0369A1',
-    border: '#BAE6FD',
-    style: 'sky-blue',
-    description: 'Soft Sky Blue & Pastel Aesthetic'
+    bg: '#180E29',
+    stripBg: '#2A1745',
+    photoBg: '#3A1F5E',
+    text: '#E9D5FF',
+    border: '#A855F7',
+    stickerTheme: 'purple-bow',
+    description: 'Modern Dark Purple & Delicate Graphic Accents'
   }
 ];
 
-// Aesthetic Beauty Filters
+// Porcelain Brightness Beauty Filters
 const IMAGE_FILTERS = [
   { 
-    id: 'porcelain-glow', 
+    id: 'porcelain-bright', 
     name: 'Porcelain Glow', 
-    css: 'brightness(115%) contrast(96%) saturate(105%)', 
-    canvasFilter: 'brightness(115%) contrast(96%) saturate(105%)' 
+    css: 'brightness(118%) contrast(96%) saturate(105%) sepia(2%)', 
+    canvasFilter: 'brightness(118%) contrast(96%) saturate(105%) sepia(2%)' 
   },
   { 
-    id: 'bright-soft', 
-    name: 'Bright & Soft', 
-    css: 'brightness(122%) contrast(92%) saturate(110%)', 
-    canvasFilter: 'brightness(122%) contrast(92%) saturate(110%)' 
+    id: 'snow-white', 
+    name: 'Pure Snow', 
+    css: 'brightness(124%) contrast(92%) saturate(110%) hue-rotate(-4deg)', 
+    canvasFilter: 'brightness(124%) contrast(92%) saturate(110%) hue-rotate(-4deg)' 
   },
   { 
-    id: 'warm-pink-touch', 
-    name: 'Rosy Warmth', 
-    css: 'brightness(110%) contrast(98%) saturate(120%) sepia(8%)', 
-    canvasFilter: 'brightness(110%) contrast(98%) saturate(120%) sepia(8%)' 
+    id: 'rosy-pink', 
+    name: 'Rosy Youth', 
+    css: 'brightness(112%) contrast(98%) saturate(125%) sepia(10%) hue-rotate(-10deg)', 
+    canvasFilter: 'brightness(112%) contrast(98%) saturate(125%) sepia(10%) hue-rotate(-10deg)' 
   },
   { 
-    id: 'retro-monochrome', 
-    name: 'B&W Film', 
-    css: 'grayscale(100%) contrast(110%) brightness(105%)', 
-    canvasFilter: 'grayscale(100%) contrast(110%) brightness(105%)' 
+    id: 'vintage-film', 
+    name: 'Vintage Touch', 
+    css: 'brightness(105%) contrast(100%) saturate(120%) sepia(25%) hue-rotate(-5deg)', 
+    canvasFilter: 'brightness(105%) contrast(100%) saturate(120%) sepia(25%) hue-rotate(-5deg)' 
   }
 ];
 
-const TIMER_OPTIONS = [3, 5, 10];
+// Timer Options
+const TIMER_OPTIONS = [3, 5, 10, 20, 30];
 
 const Home = () => {
   const [photos, setPhotos] = useState([]);
@@ -128,7 +128,7 @@ const Home = () => {
   const canvasRef = useRef(null);
 
   useEffect(() => {
-    const localData = localStorage.getItem('aesthetic_booth_gallery');
+    const localData = localStorage.getItem('cyan_glass_booth_gallery');
     if (localData) {
       setSavedGallery(JSON.parse(localData));
     }
@@ -227,30 +227,56 @@ const Home = () => {
     setIsCapturing(false);
   };
 
-  // Drawing Clean Frame Decorations on Canvas
-  const drawFrameDecorations = (ctx, x, y, width, height, style, color) => {
-    ctx.strokeStyle = color;
-    ctx.lineWidth = 2;
+  // Canvas Vector Sticker Graphics Renderer (Pure Image Art - No Emoji)
+  const drawStickersOnCanvas = (ctx, x, y, width, height, theme, accentColor) => {
+    ctx.save();
+    ctx.fillStyle = accentColor;
+    ctx.strokeStyle = accentColor;
 
-    if (style === 'kawaii') {
-      // Small Cute Stars/Polka Dots Corner Accents
-      ctx.fillStyle = '#FFD166';
+    if (theme === 'bear-fish') {
+      // Cute Bear Ears Sticker on Top Left
       ctx.beginPath();
-      ctx.arc(x + 20, y + 25, 8, 0, Math.PI * 2);
+      ctx.arc(x + 25, y + 20, 8, 0, Math.PI * 2);
+      ctx.arc(x + 45, y + 20, 8, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Cute Fish Silhouette Top Right
+      ctx.beginPath();
+      ctx.ellipse(x + width - 30, y + 25, 10, 6, 0, 0, Math.PI * 2);
       ctx.fill();
       ctx.beginPath();
-      ctx.arc(x + width - 20, y + 25, 8, 0, Math.PI * 2);
+      ctx.moveTo(x + width - 20, y + 25);
+      ctx.lineTo(x + width - 12, y + 20);
+      ctx.lineTo(x + width - 12, y + 30);
+      ctx.closePath();
       ctx.fill();
-    } else if (style === 'pink-hearts') {
-      // Heart Outline Accents
-      ctx.fillStyle = '#FF4D6D';
-      ctx.beginPath();
-      ctx.arc(x + 25, y + 25, 6, 0, Math.PI * 2);
-      ctx.arc(x + width - 25, y + 25, 6, 0, Math.PI * 2);
-      ctx.fill();
-    } else if (style === 'purple-gold') {
-      ctx.strokeRect(x + 8, y + 8, width - 16, height - 16);
+    } else if (theme === 'pink-heart' || theme === 'purple-bow') {
+      // Heart / Bow Sticker Graphic
+      const drawLittleHeart = (hx, hy) => {
+        ctx.beginPath();
+        ctx.arc(hx - 4, hy - 4, 4, Math.PI, 0, false);
+        ctx.arc(hx + 4, hy - 4, 4, Math.PI, 0, false);
+        ctx.lineTo(hx, hy + 6);
+        ctx.closePath();
+        ctx.fill();
+      };
+      drawLittleHeart(x + 25, y + 25);
+      drawLittleHeart(x + width - 25, y + 25);
+    } else {
+      // Sparkling Star Vector Stickers
+      const drawSparkle = (sx, sy, r) => {
+        ctx.beginPath();
+        ctx.moveTo(sx, sy - r);
+        ctx.quadraticCurveTo(sx, sy, sx + r, sy);
+        ctx.quadraticCurveTo(sx, sy, sx, sy + r);
+        ctx.quadraticCurveTo(sx, sy, sx - r, sy);
+        ctx.quadraticCurveTo(sx, sy, sx, sy - r);
+        ctx.fill();
+      };
+      drawSparkle(x + 25, y + 25, 10);
+      drawSparkle(x + width - 25, y + 25, 10);
     }
+    ctx.restore();
   };
 
   const generateCanvasAndSave = () => {
@@ -267,7 +293,7 @@ const Home = () => {
     const photoWidth = 300;
     const photoHeight = 225;
     const photoGap = 16;
-    const headerHeight = 60;
+    const headerHeight = 65;
     const footerHeight = 110;
 
     const totalHeight = outerMargin * 2 + headerHeight + 4 * photoHeight + 3 * photoGap + footerHeight;
@@ -275,32 +301,31 @@ const Home = () => {
     canvas.width = totalWidth;
     canvas.height = totalHeight;
 
-    // Fill Outer Canvas Background
+    // Background Canvas Fill
     ctx.fillStyle = selectedFrame.bg;
     ctx.fillRect(0, 0, totalWidth, totalHeight);
 
-    // Draw Left and Right Photo Strips
     const col1X = outerMargin;
     const col1Y = outerMargin;
     const col2X = outerMargin + colWidth + gapBetweenCols;
     const stripHeight = totalHeight - outerMargin * 2;
 
-    // Column 1 Background Strip
+    // Left Strip Background
     ctx.fillStyle = selectedFrame.stripBg;
     ctx.fillRect(col1X, col1Y, colWidth, stripHeight);
     ctx.strokeStyle = selectedFrame.border;
-    ctx.lineWidth = 2;
+    ctx.lineWidth = 3;
     ctx.strokeRect(col1X, col1Y, colWidth, stripHeight);
 
-    // Column 2 Background Strip
+    // Right Strip Background
     ctx.fillRect(col2X, col1Y, colWidth, stripHeight);
     ctx.strokeRect(col2X, col1Y, colWidth, stripHeight);
 
-    // Decorate Strips
-    drawFrameDecorations(ctx, col1X, col1Y, colWidth, stripHeight, selectedFrame.style, selectedFrame.border);
-    drawFrameDecorations(ctx, col2X, col2Y, colWidth, stripHeight, selectedFrame.style, selectedFrame.border);
+    // Draw Graphic Stickers
+    drawStickersOnCanvas(ctx, col1X, col1Y, colWidth, stripHeight, selectedFrame.stickerTheme, selectedFrame.border);
+    drawStickersOnCanvas(ctx, col2X, col1Y, colWidth, stripHeight, selectedFrame.stickerTheme, selectedFrame.border);
 
-    // Header Title Text
+    // Header Text
     ctx.fillStyle = selectedFrame.text;
     ctx.font = 'bold 20px sans-serif';
     ctx.textAlign = 'center';
@@ -308,19 +333,20 @@ const Home = () => {
     const col1CenterX = col1X + colWidth / 2;
     const col2CenterX = col2X + colWidth / 2;
 
-    const headerText = 'PHOTO BOOTH';
-
-    ctx.fillText(headerText, col1CenterX, col1Y + 40);
-    ctx.fillText(headerText, col2CenterX, col2Y + 40);
+    ctx.fillText('LOVEBIRDS PHOTOBOOTH', col1CenterX, col1Y + 45);
+    ctx.fillText('LOVEBIRDS PHOTOBOOTH', col2CenterX, col2Y + 45);
 
     let loadedCount = 0;
+
     photos.forEach((photoSrc, index) => {
       const img = new Image();
+      img.crossOrigin = 'anonymous';
       img.src = photoSrc;
+
       img.onload = () => {
         const yPos = col1Y + headerHeight + index * (photoHeight + photoGap);
 
-        // Column 1 Photo Draw
+        // Photo 1 Left Strip
         const col1PhotoX = col1X + (colWidth - photoWidth) / 2;
         ctx.fillStyle = selectedFrame.photoBg;
         ctx.fillRect(col1PhotoX - 4, yPos - 4, photoWidth + 8, photoHeight + 8);
@@ -330,7 +356,7 @@ const Home = () => {
         ctx.drawImage(img, col1PhotoX, yPos, photoWidth, photoHeight);
         ctx.restore();
 
-        // Column 2 Photo Draw
+        // Photo 2 Right Strip
         const col2PhotoX = col2X + (colWidth - photoWidth) / 2;
         ctx.fillStyle = selectedFrame.photoBg;
         ctx.fillRect(col2PhotoX - 4, yPos - 4, photoWidth + 8, photoHeight + 8);
@@ -341,6 +367,7 @@ const Home = () => {
         ctx.restore();
 
         loadedCount++;
+
         if (loadedCount === 4) {
           const today = new Date().toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' });
 
@@ -349,62 +376,79 @@ const Home = () => {
           ctx.font = 'bold 22px serif';
           ctx.fillText(coupleNames, col1CenterX, totalHeight - outerMargin - footerHeight / 2);
           ctx.font = '500 12px sans-serif';
-          ctx.globalAlpha = 0.75;
-          ctx.fillText(today, col1CenterX, totalHeight - outerMargin - footerHeight / 2 + 22);
+          ctx.globalAlpha = 0.8;
+          ctx.fillText(`MOMENTS IN LOVE • ${today}`, col1CenterX, totalHeight - outerMargin - footerHeight / 2 + 22);
 
           ctx.font = 'bold 22px serif';
           ctx.globalAlpha = 1.0;
           ctx.fillText(coupleNames, col2CenterX, totalHeight - outerMargin - footerHeight / 2);
           ctx.font = '500 12px sans-serif';
-          ctx.globalAlpha = 0.75;
-          ctx.fillText(today, col2CenterX, totalHeight - outerMargin - footerHeight / 2 + 22);
+          ctx.globalAlpha = 0.8;
+          ctx.fillText(`MOMENTS IN LOVE • ${today}`, col2CenterX, totalHeight - outerMargin - footerHeight / 2 + 22);
+          ctx.globalAlpha = 1.0;
 
-          const dataUrl = canvas.toDataURL('image/png');
+          // Safe PNG Download Trigger
+          setTimeout(() => {
+            const dataUrl = canvas.toDataURL('image/png');
+            const link = document.createElement('a');
+            link.download = `cyan-aesthetic-strip-${Date.now()}.png`;
+            link.href = dataUrl;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
 
-          const link = document.createElement('a');
-          link.download = `photo-booth-${Date.now()}.png`;
-          link.href = dataUrl;
-          link.click();
-
-          const updatedGallery = [{ id: Date.now(), image: dataUrl, date: today, coupleNames }, ...savedGallery];
-          setSavedGallery(updatedGallery);
-          localStorage.setItem('aesthetic_booth_gallery', JSON.stringify(updatedGallery));
+            const updatedGallery = [{ id: Date.now(), image: dataUrl, date: today, coupleNames }, ...savedGallery];
+            setSavedGallery(updatedGallery);
+            localStorage.setItem('cyan_glass_booth_gallery', JSON.stringify(updatedGallery));
+          }, 100);
         }
       };
     });
   };
 
+  const deleteMemory = (id) => {
+    const filtered = savedGallery.filter((item) => item.id !== id);
+    setSavedGallery(filtered);
+    localStorage.setItem('cyan_glass_booth_gallery', JSON.stringify(filtered));
+  };
+
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 font-sans pb-24 px-4 pt-6 relative">
-      <div className="max-w-md mx-auto space-y-5">
-        {/* Header */}
-        <header className="bg-slate-900/90 border border-slate-800 p-4 rounded-3xl shadow-lg flex justify-between items-center">
+    <div className="min-h-screen bg-[#031726] text-cyan-50 font-sans pb-28 px-3 sm:px-4 pt-4 sm:pt-6 relative overflow-x-hidden">
+      {/* Cyan Glassmorphism Glow Orbs */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div className="absolute -top-20 -left-20 w-80 h-80 bg-cyan-500/20 rounded-full blur-[140px] animate-pulse" />
+        <div className="absolute top-1/2 -right-20 w-80 h-80 bg-teal-500/15 rounded-full blur-[140px]" />
+      </div>
+
+      <div className="relative z-10 max-w-md mx-auto space-y-4 sm:space-y-5">
+        {/* Main Header Glass Panel */}
+        <header className="bg-cyan-950/40 backdrop-blur-xl border border-cyan-500/30 p-4 rounded-3xl shadow-xl flex justify-between items-center">
           <div>
-            <span className="text-[10px] font-bold uppercase tracking-widest text-pink-400 flex items-center gap-1">
-              <LuSparkles className="w-3.5 h-3.5" /> Aesthetic Photobooth
+            <span className="text-[10px] font-extrabold uppercase tracking-widest text-cyan-400 flex items-center gap-1.5">
+              <LuSparkles className="w-3.5 h-3.5 text-cyan-400" /> Aesthetic Photobooth
             </span>
-            <h1 className="text-lg font-black tracking-tight text-white mt-0.5">Photo Strip Studio</h1>
+            <h1 className="text-base sm:text-lg font-black tracking-tight text-white mt-0.5">Dark Cyan Glass Studio</h1>
           </div>
-          <div className="w-9 h-9 rounded-2xl bg-pink-500/10 border border-pink-500/30 flex items-center justify-center text-pink-400">
-            <LuSmile className="w-5 h-5" />
+          <div className="w-10 h-10 rounded-2xl bg-cyan-900/40 border border-cyan-400/30 flex items-center justify-center text-cyan-300 shadow-inner">
+            <LuSparkles className="w-5 h-5 text-cyan-400" />
           </div>
         </header>
 
-        {/* Timer Control Bar */}
-        <div className="bg-slate-900/80 p-3.5 rounded-2xl border border-slate-800 flex items-center justify-between">
-          <span className="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1.5">
-            <LuTimer className="w-4 h-4 text-pink-400" /> Delay Timer:
+        {/* Timer Control Bar (3s, 5s, 10s, 20s, 30s) */}
+        <div className="bg-cyan-950/40 backdrop-blur-xl p-3.5 rounded-2xl border border-cyan-500/20 shadow-lg flex items-center justify-between">
+          <span className="text-xs font-bold uppercase tracking-wider text-cyan-300 flex items-center gap-1.5 shrink-0">
+            <LuTimer className="w-4 h-4 text-cyan-400" /> Timer Delay:
           </span>
-          <div className="flex gap-2">
+          <div className="flex gap-1.5 overflow-x-auto py-0.5 scrollbar-none">
             {TIMER_OPTIONS.map((sec) => (
               <button
                 key={sec}
                 disabled={isCapturing}
                 onClick={() => setSelectedTimer(sec)}
-                className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${
+                className={`px-2.5 py-1.5 rounded-xl text-xs font-black transition-all shrink-0 ${
                   selectedTimer === sec
-                    ? 'bg-pink-500 text-white shadow-md'
-                    : 'bg-slate-800 text-slate-400 hover:text-slate-200'
+                    ? 'bg-cyan-400 text-white shadow-lg shadow-cyan-400/30 border border-cyan-200'
+                    : 'bg-cyan-950/60 text-cyan-300/60 border border-cyan-500/10 hover:text-cyan-200'
                 }`}
               >
                 {sec}s
@@ -414,13 +458,13 @@ const Home = () => {
         </div>
 
         {/* Camera Viewfinder */}
-        <div className="relative rounded-3xl overflow-hidden bg-black shadow-2xl border border-slate-800 aspect-[4/3] flex items-center justify-center">
+        <div className="relative rounded-3xl overflow-hidden bg-slate-950 shadow-2xl border border-cyan-500/30 aspect-[4/3] flex items-center justify-center">
           {cameraError ? (
             <div className="p-6 text-center space-y-3">
-              <p className="text-rose-400 text-xs font-semibold">Camera Access Failed</p>
+              <p className="text-cyan-400 text-xs font-semibold">Camera Access Failed</p>
               <button
                 onClick={startCamera}
-                className="px-4 py-2 bg-slate-800 text-xs text-white rounded-xl"
+                className="px-4 py-2 bg-cyan-950 text-xs text-cyan-200 rounded-xl border border-cyan-500/30"
               >
                 Retry Camera
               </button>
@@ -437,22 +481,22 @@ const Home = () => {
           )}
 
           {countdown && (
-            <div className="absolute inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-20">
-              <span className="text-pink-400 text-6xl font-black animate-ping">
+            <div className="absolute inset-0 bg-slate-950/80 backdrop-blur-md flex items-center justify-center z-20">
+              <span className="text-cyan-400 text-6xl font-black tracking-widest animate-ping">
                 {countdown}
               </span>
             </div>
           )}
 
           {!cameraError && (
-            <div className="absolute bottom-4 left-0 right-0 flex justify-center z-10">
+            <div className="absolute bottom-4 left-0 right-0 flex justify-center z-10 px-4">
               <button
                 disabled={isCapturing}
                 onClick={startPhotoboothSequence}
-                className={`px-6 py-3 rounded-2xl font-bold text-xs flex items-center gap-2 shadow-xl border transition-all ${
+                className={`w-full max-w-xs py-3 rounded-2xl font-black text-xs flex items-center justify-center gap-2 shadow-xl border transition-all ${
                   isCapturing
-                    ? 'bg-slate-800 border-slate-700 text-slate-500 cursor-not-allowed'
-                    : 'bg-pink-500 hover:bg-pink-400 text-white border-pink-400 active:scale-95'
+                    ? 'bg-slate-900 border-slate-800 text-slate-500 cursor-not-allowed'
+                    : 'bg-cyan-400 hover:bg-cyan-300 text-slate-950 border-cyan-200 shadow-cyan-400/30 active:scale-95'
                 }`}
               >
                 <LuCamera className="w-4.5 h-4.5" />
@@ -462,23 +506,23 @@ const Home = () => {
           )}
         </div>
 
-        {/* Customization Options */}
+        {/* Customization Glass Panels */}
         {photos.length === 4 && (
-          <div className="space-y-5 pt-3 border-t border-slate-800">
-            {/* Filter Selector */}
+          <div className="space-y-4 pt-2 border-t border-cyan-500/20">
+            {/* Porcelain Beauty Filters with Smooth Scroll */}
             <div className="space-y-2">
-              <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
-                <LuSlidersHorizontal className="w-4 h-4 text-pink-400" /> Photo Filters
+              <h3 className="text-xs font-bold uppercase tracking-wider text-cyan-300/80 flex items-center gap-1.5 px-1">
+                <LuSlidersHorizontal className="w-4 h-4 text-cyan-400" /> Porcelain Photo Filters
               </h3>
-              <div className="flex gap-2 overflow-x-auto pb-1">
+              <div className="flex gap-2 overflow-x-auto py-1 px-1 scrollbar-thin scrollbar-thumb-cyan-900">
                 {IMAGE_FILTERS.map((filter) => (
                   <button
                     key={filter.id}
                     onClick={() => setSelectedFilter(filter)}
-                    className={`px-3.5 py-2 rounded-xl text-xs font-semibold border transition-all shrink-0 ${
+                    className={`px-4 py-2 rounded-2xl text-xs font-semibold border transition-all shrink-0 ${
                       selectedFilter.id === filter.id
-                        ? 'border-pink-500 bg-pink-500/20 text-pink-300'
-                        : 'border-slate-800 bg-slate-900 text-slate-400 hover:text-white'
+                        ? 'border-cyan-400 bg-cyan-900/80 text-cyan-200 shadow-md backdrop-blur-md'
+                        : 'border-cyan-500/10 bg-cyan-950/40 text-slate-400 hover:text-cyan-200'
                     }`}
                   >
                     {filter.name}
@@ -487,52 +531,52 @@ const Home = () => {
               </div>
             </div>
 
-            {/* Frame Templates Selector (Matches User Screenshot) */}
+            {/* Frame Templates Selector */}
             <div className="space-y-2">
-              <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
-                <LuLayoutGrid className="w-4 h-4 text-pink-400" /> Frame Templates (From Screenshot)
+              <h3 className="text-xs font-bold uppercase tracking-wider text-cyan-300/80 flex items-center gap-1.5 px-1">
+                <LuLayoutGrid className="w-4 h-4 text-cyan-400" /> Cute Sticker Frame Templates
               </h3>
-              <div className="grid grid-cols-2 gap-2.5">
+              <div className="grid grid-cols-2 gap-2.5 px-1">
                 {FRAME_TEMPLATES.map((frame) => (
                   <button
                     key={frame.id}
                     onClick={() => setSelectedFrame(frame)}
-                    className={`p-3 rounded-2xl text-left border transition-all ${
+                    className={`p-3 rounded-2xl text-left border transition-all relative overflow-hidden ${
                       selectedFrame.id === frame.id
-                        ? 'border-pink-500 bg-slate-900 ring-1 ring-pink-500'
-                        : 'border-slate-800 bg-slate-900/50 hover:border-slate-700'
+                        ? 'border-cyan-400 bg-cyan-950/90 shadow-md ring-1 ring-cyan-400'
+                        : 'border-cyan-500/10 bg-cyan-950/30 hover:border-cyan-500/30'
                     }`}
                   >
                     <div className="flex items-center gap-2 mb-1">
                       <span
-                        className="w-3.5 h-3.5 rounded-full border border-white/20"
-                        style={{ backgroundColor: frame.stripBg }}
+                        className="w-3.5 h-3.5 rounded-full border border-white/30"
+                        style={{ backgroundColor: frame.border }}
                       />
-                      <span className="text-xs font-bold text-white">{frame.name}</span>
+                      <span className="text-xs font-bold text-white leading-tight">{frame.name}</span>
                     </div>
-                    <p className="text-[10px] text-slate-400 leading-tight">{frame.description}</p>
+                    <p className="text-[10px] text-cyan-200/50 leading-tight">{frame.description}</p>
                   </button>
                 ))}
               </div>
             </div>
 
             {/* Couple / User Name Input */}
-            <div className="bg-slate-900 p-3.5 rounded-2xl border border-slate-800">
-              <label className="text-[10px] uppercase font-bold text-slate-400 tracking-wider block mb-1 flex items-center gap-1">
-                <LuUser className="w-3 h-3 text-pink-400" /> Frame Footer Text
+            <div className="bg-cyan-950/40 backdrop-blur-xl p-3.5 rounded-2xl border border-cyan-500/20 shadow-lg">
+              <label className="text-[10px] uppercase font-extrabold text-cyan-300/80 tracking-wider block mb-1.5 flex items-center gap-1">
+                <LuUser className="w-3 h-3 text-cyan-400" /> Frame Footer Names
               </label>
               <input
                 type="text"
                 value={coupleNames}
                 onChange={(e) => setCoupleNames(e.target.value)}
                 placeholder="e.g. CHLOE & LEO"
-                className="w-full text-xs bg-slate-950 text-white rounded-xl px-3.5 py-2.5 border border-slate-800 focus:outline-none focus:border-pink-500"
+                className="w-full text-xs bg-slate-950/80 text-cyan-100 rounded-xl px-3.5 py-2.5 border border-cyan-500/20 focus:outline-none focus:border-cyan-400 transition-colors"
               />
             </div>
 
-            {/* Preview Card */}
+            {/* Live Photobooth Double Strip Card Preview */}
             <div
-              className="p-4 rounded-3xl border shadow-xl space-y-3"
+              className="p-3.5 rounded-3xl border shadow-2xl space-y-3 relative overflow-hidden backdrop-blur-md"
               style={{
                 backgroundColor: selectedFrame.bg,
                 borderColor: selectedFrame.border,
@@ -540,34 +584,34 @@ const Home = () => {
               }}
             >
               <div className="text-center text-[11px] font-bold uppercase tracking-widest opacity-80">
-                PHOTO BOOTH
+                LOVEBIRDS PHOTOBOOTH
               </div>
 
               {/* 2 Strips Side by Side */}
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-2 gap-2.5">
                 {[1, 2].map((col) => (
                   <div
                     key={col}
-                    className="space-y-2 p-2 rounded-2xl border"
+                    className="space-y-2 p-2 rounded-2xl border relative overflow-hidden"
                     style={{ backgroundColor: selectedFrame.stripBg, borderColor: selectedFrame.border }}
                   >
                     {photos.map((src, i) => (
                       <div
                         key={i}
-                        className="p-1 rounded-lg overflow-hidden border aspect-[4/3]"
+                        className="p-1 rounded-xl shadow-sm overflow-hidden border aspect-[4/3]"
                         style={{ backgroundColor: selectedFrame.photoBg, borderColor: selectedFrame.border }}
                       >
                         <img
                           src={src}
                           alt={`Snap ${i + 1}`}
-                          className="w-full h-full object-cover rounded"
+                          className="w-full h-full object-cover rounded-lg"
                           style={{ filter: selectedFilter.css }}
                         />
                       </div>
                     ))}
-                    <div className="text-center pt-1">
-                      <p className="text-xs font-bold tracking-wide">{coupleNames}</p>
-                      <p className="text-[9px] opacity-70">
+                    <div className="text-center pt-1.5">
+                      <p className="text-xs font-serif font-bold tracking-wide">{coupleNames}</p>
+                      <p className="text-[9px] opacity-75 mt-0.5">
                         {new Date().toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' })}
                       </p>
                     </div>
@@ -577,21 +621,43 @@ const Home = () => {
             </div>
 
             {/* Action Buttons */}
-            <div className="flex gap-2.5">
+            <div className="flex gap-2.5 pt-1">
               <button
                 onClick={startPhotoboothSequence}
-                className="flex-1 py-3.5 rounded-2xl bg-slate-900 border border-slate-800 text-slate-300 font-bold text-xs flex items-center justify-center gap-1.5 hover:bg-slate-800"
+                className="flex-1 py-3.5 rounded-2xl bg-cyan-950/60 backdrop-blur-xl border border-cyan-500/30 text-cyan-200 font-bold text-xs flex items-center justify-center gap-1.5 hover:bg-cyan-900 transition-all active:scale-95"
               >
                 <LuRefreshCw className="w-4 h-4" /> Retake
               </button>
               <button
                 onClick={generateCanvasAndSave}
-                className="flex-2 py-3.5 rounded-2xl bg-pink-500 hover:bg-pink-400 text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-lg border border-pink-400"
+                className="flex-2 py-3.5 rounded-2xl bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-black text-xs flex items-center justify-center gap-1.5 shadow-xl shadow-cyan-400/20 border border-cyan-200 transition-all active:scale-95"
               >
                 <LuDownload className="w-4 h-4" /> Save Photo Strip
               </button>
             </div>
           </div>
+        )}
+
+        {/* Saved Gallery */}
+        {savedGallery.length > 0 && (
+          <section className="pt-4 border-t border-cyan-500/20 space-y-3">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-cyan-300/80 px-1">
+              Saved Romance Strips
+            </h3>
+            <div className="grid grid-cols-2 gap-3">
+              {savedGallery.map((item) => (
+                <div key={item.id} className="relative bg-cyan-950/40 backdrop-blur-xl p-2 rounded-2xl border border-cyan-500/20 shadow-lg">
+                  <img src={item.image} alt="Saved Memory" className="w-full h-auto rounded-xl" />
+                  <button
+                    onClick={() => deleteMemory(item.id)}
+                    className="absolute top-3 right-3 p-1.5 bg-slate-950/80 text-cyan-300 rounded-full hover:bg-rose-600 hover:text-white transition-all border border-cyan-500/20"
+                  >
+                    <LuTrash2 className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+              ))}
+            </div>
+          </section>
         )}
 
         <canvas ref={canvasRef} className="hidden" />
