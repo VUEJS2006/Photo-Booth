@@ -8,30 +8,69 @@ import {
   LuTrash2,
   LuAperture,
   LuSlidersHorizontal,
-  LuTimer
+  LuTimer,
+  LuSticker,
+  LuCheck
 } from 'react-icons/lu';
 
-// Photobooth Strip Themes (Emoji free)
+// Premium Photobooth Strip Themes (Emoji Free)
 const THEMES = [
-  { id: 'soft-pink', name: 'Soft Pink', bg: '#FDF2F8', text: '#831843', border: '#F472B6', photoBg: '#FBCFE8' },
-  { id: 'romance-rose', name: 'Romance Rose', bg: '#4A0E17', text: '#FCE7F3', border: '#FB7185', photoBg: '#2D0A10' },
-  { id: 'cute-brown', name: 'Cozy Teddy', bg: '#2C1A14', text: '#FDE68A', border: '#D97706', photoBg: '#452719' },
-  { id: 'milk-tea', name: 'Milk Tea', bg: '#F5EBE0', text: '#5C3D2E', border: '#D5B9B2', photoBg: '#E3D5CA' },
-  { id: 'cyber-cyan', name: 'Cyber Cyan', bg: '#0F172A', text: '#E2E8F0', border: '#0891B2', photoBg: '#1E293B' },
-  { id: 'midnight', name: 'Midnight Glass', bg: '#0B132B', text: '#F8FAFC', border: '#1E293B', photoBg: '#1C2541' },
-  { id: 'deep-ocean', name: 'Deep Ocean', bg: '#03071E', text: '#F1F5F9', border: '#1D4ED8', photoBg: '#0F172A' },
-  { id: 'pure-white', name: 'Pure White', bg: '#FFFFFF', text: '#0F172A', border: '#CBD5E1', photoBg: '#F1F5F9' },
+  { id: 'cyber-dark', name: 'Cyber Neon', bg: '#0A0E1A', text: '#38BDF8', border: '#0284C7', photoBg: '#1E293B' },
+  { id: 'koreans-cream', name: 'Korean Soft Cream', bg: '#FFFDF9', text: '#475569', border: '#E2E8F0', photoBg: '#F8FAFC' },
+  { id: 'y2k-pink', name: 'Y2K Sweet Pink', bg: '#FDF2F8', text: '#DB2777', border: '#F472B6', photoBg: '#FCE7F3' },
+  { id: 'midnight-luxe', name: 'Midnight Luxe', bg: '#0F172A', text: '#F8FAFC', border: '#334155', photoBg: '#1E293B' },
+  { id: 'cozy-latte', name: 'Cozy Vintage Latte', bg: '#2B211B', text: '#FDE68A', border: '#B45309', photoBg: '#3D2E24' },
+  { id: 'pure-contrast', name: 'Monochrome Modern', bg: '#000000', text: '#FFFFFF', border: '#333333', photoBg: '#111111' },
 ];
 
-// Photo Filters Presets (Emoji free)
+// Photo Booth Filters with Beauty Smooth Effect (Emoji Free)
 const IMAGE_FILTERS = [
-  { id: 'none', name: 'Normal', css: 'none', canvasFilter: 'none' },
-  { id: 'kawaii', name: 'Soft Kawaii', css: 'brightness(112%) contrast(95%) saturate(135%) hue-rotate(-5deg)', canvasFilter: 'brightness(112%) contrast(95%) saturate(135%) hue-rotate(-5deg)' },
-  { id: 'pastel', name: 'Pastel Dream', css: 'brightness(118%) contrast(90%) saturate(110%) sepia(15%)', canvasFilter: 'brightness(118%) contrast(90%) saturate(110%) sepia(15%)' },
-  { id: 'peach', name: 'Warm Peach', css: 'brightness(108%) contrast(100%) saturate(130%) sepia(20%) hue-rotate(-10deg)', canvasFilter: 'brightness(108%) contrast(100%) saturate(130%) sepia(20%) hue-rotate(-10deg)' },
-  { id: 'glow', name: 'Angel Glow', css: 'brightness(120%) contrast(105%) saturate(125%)', canvasFilter: 'brightness(120%) contrast(105%) saturate(125%)' },
-  { id: 'vintage', name: 'Retro Film', css: 'sepia(45%) contrast(92%) brightness(105%)', canvasFilter: 'sepia(45%) contrast(92%) brightness(105%)' },
-  { id: 'bw', name: 'Soft B&W', css: 'grayscale(100%) brightness(105%) contrast(110%)', canvasFilter: 'grayscale(100%) brightness(105%) contrast(110%)' },
+  { 
+    id: 'beauty-smooth', 
+    name: 'Beauty Smooth', 
+    css: 'brightness(108%) contrast(98%) saturate(108%) sepia(5%)', 
+    canvasFilter: 'brightness(108%) contrast(98%) saturate(108%) sepia(5%)' 
+  },
+  { 
+    id: 'korean-glow', 
+    name: 'Korean Bright Glow', 
+    css: 'brightness(116%) contrast(94%) saturate(115%) hue-rotate(-5deg)', 
+    canvasFilter: 'brightness(116%) contrast(94%) saturate(115%) hue-rotate(-5deg)' 
+  },
+  { 
+    id: 'warm-peach', 
+    name: 'Soft Peach Skin', 
+    css: 'brightness(106%) contrast(102%) saturate(120%) sepia(15%) hue-rotate(-8deg)', 
+    canvasFilter: 'brightness(106%) contrast(102%) saturate(120%) sepia(15%) hue-rotate(-8deg)' 
+  },
+  { 
+    id: 'vintage-film', 
+    name: 'Retro Film Booth', 
+    css: 'sepia(35%) contrast(105%) brightness(102%) saturate(90%)', 
+    canvasFilter: 'sepia(35%) contrast(105%) brightness(102%) saturate(90%)' 
+  },
+  { 
+    id: 'cyber-blue', 
+    name: 'Cyber Cool Blue', 
+    css: 'brightness(105%) contrast(105%) hue-rotate(15deg) saturate(110%)', 
+    canvasFilter: 'brightness(105%) contrast(105%) hue-rotate(15deg) saturate(110%)' 
+  },
+  { 
+    id: 'soft-bw', 
+    name: 'Classic B&W Studio', 
+    css: 'grayscale(100%) brightness(106%) contrast(108%)', 
+    canvasFilter: 'grayscale(100%) brightness(106%) contrast(108%)' 
+  },
+];
+
+// Graphic Stickers Option (Emoji Free SVG Icons)
+const STICKERS = [
+  { id: 'none', name: 'None' },
+  { id: 'sparkles', name: 'Sparkles', symbol: '✦' },
+  { id: 'star-cross', name: 'Y2K Star', symbol: '✧' },
+  { id: 'heart', name: 'Heart Stamp', symbol: '♥' },
+  { id: 'crown', name: 'Crown Stamp', symbol: '♕' },
+  { id: 'flower', name: 'Blossom', symbol: '✿' }
 ];
 
 const TIMER_OPTIONS = [5, 10, 20, 30];
@@ -42,6 +81,7 @@ const Home = () => {
   const [countdown, setCountdown] = useState(null);
   const [selectedTheme, setSelectedTheme] = useState(THEMES[0]);
   const [selectedFilter, setSelectedFilter] = useState(IMAGE_FILTERS[0]);
+  const [selectedSticker, setSelectedSticker] = useState(STICKERS[1]);
   const [selectedTimer, setSelectedTimer] = useState(5);
   const [caption, setCaption] = useState('STUDIO MEMORIES');
   const [stream, setStream] = useState(null);
@@ -64,7 +104,7 @@ const Home = () => {
       const mediaStream = await navigator.mediaDevices.getUserMedia({
         video: { 
           facingMode: 'user',
-          aspectRatio: { ideal: 4 / 3 } // Normal 4:3 aspect ratio
+          aspectRatio: { ideal: 3 / 4 } // Mobile Standard 3:4 Aspect Ratio
         },
         audio: false,
       });
@@ -73,7 +113,7 @@ const Home = () => {
         videoRef.current.srcObject = mediaStream;
       }
     } catch (err) {
-      console.warn('Preferred camera settings failed, trying fallback standard video...', err);
+      console.warn('Fallback standard video resolution stream...', err);
       try {
         const fallbackStream = await navigator.mediaDevices.getUserMedia({
           video: true,
@@ -84,7 +124,6 @@ const Home = () => {
           videoRef.current.srcObject = fallbackStream;
         }
       } catch (fallbackErr) {
-        console.error('Camera access completely failed:', fallbackErr);
         setCameraError(true);
       }
     }
@@ -107,15 +146,17 @@ const Home = () => {
     if (!video) return null;
 
     const canvas = document.createElement('canvas');
-    const vWidth = video.videoWidth || 640;
-    const vHeight = video.videoHeight || 480;
+    const targetWidth = 480;
+    const targetHeight = 640; // 3:4 Aspect Ratio Portrait Output
 
-    // Normal 4:3 Aspect Ratio Output (640x480)
-    canvas.width = 640;
-    canvas.height = 480;
+    canvas.width = targetWidth;
+    canvas.height = targetHeight;
     const ctx = canvas.getContext('2d');
 
-    const targetRatio = 4 / 3;
+    const vWidth = video.videoWidth || targetWidth;
+    const vHeight = video.videoHeight || targetHeight;
+
+    const targetRatio = targetWidth / targetHeight;
     const currentRatio = vWidth / vHeight;
     let sWidth = vWidth;
     let sHeight = vHeight;
@@ -170,30 +211,36 @@ const Home = () => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
 
-    const cardWidth = 600;
-    const photoWidth = 520;
-    const photoHeight = 390; // 4:3 aspect ratio
+    const cardWidth = 540;
+    const photoWidth = 460;
+    const photoHeight = 613; // Exact 3:4 aspect ratio frame inside strip
     const padding = 40;
-    const gap = 20;
-    const headerHeight = 50;
-    const footerHeight = 140;
+    const gap = 24;
+    const headerHeight = 60;
+    const footerHeight = 150;
 
     const totalHeight = padding * 2 + headerHeight + 4 * photoHeight + 3 * gap + footerHeight;
 
     canvas.width = cardWidth;
     canvas.height = totalHeight;
 
+    // Card Outer Background Fill
     ctx.fillStyle = selectedTheme.bg;
     ctx.fillRect(0, 0, cardWidth, totalHeight);
 
+    // Stylish Outer Border Line
     ctx.strokeStyle = selectedTheme.border;
     ctx.lineWidth = 6;
-    ctx.strokeRect(12, 12, cardWidth - 24, totalHeight - 24);
+    ctx.strokeRect(14, 14, cardWidth - 28, totalHeight - 28);
 
+    // Card Header Title with Graphic Stamps
     ctx.fillStyle = selectedTheme.text;
     ctx.font = 'bold 22px sans-serif';
     ctx.textAlign = 'center';
-    ctx.fillText('• PHOTO BOOTH •', cardWidth / 2, padding + 25);
+    const headerTitle = selectedSticker.symbol 
+      ? `${selectedSticker.symbol} PHOTO BOOTH ${selectedSticker.symbol}` 
+      : '• PHOTO BOOTH •';
+    ctx.fillText(headerTitle, cardWidth / 2, padding + 30);
 
     let loadedCount = 0;
     photos.forEach((photoSrc, index) => {
@@ -202,6 +249,7 @@ const Home = () => {
       img.onload = () => {
         const yPos = padding + headerHeight + index * (photoHeight + gap);
 
+        // Photo Frame Container Inner Layer
         ctx.fillStyle = selectedTheme.photoBg;
         ctx.fillRect((cardWidth - photoWidth) / 2 - 8, yPos - 8, photoWidth + 16, photoHeight + 16);
 
@@ -210,17 +258,25 @@ const Home = () => {
         ctx.drawImage(img, (cardWidth - photoWidth) / 2, yPos, photoWidth, photoHeight);
         ctx.restore();
 
+        // Sticker Overlays on Top Left & Top Right of Each Frame
+        if (selectedSticker.symbol) {
+          ctx.fillStyle = selectedTheme.text;
+          ctx.font = 'bold 24px sans-serif';
+          ctx.fillText(selectedSticker.symbol, (cardWidth - photoWidth) / 2 + 20, yPos + 35);
+          ctx.fillText(selectedSticker.symbol, (cardWidth + photoWidth) / 2 - 20, yPos + 35);
+        }
+
         loadedCount++;
         if (loadedCount === 4) {
           ctx.fillStyle = selectedTheme.text;
-          ctx.font = '600 28px sans-serif';
+          ctx.font = '700 26px sans-serif';
           ctx.textAlign = 'center';
-          ctx.fillText(caption, cardWidth / 2, totalHeight - footerHeight / 2 - 10);
+          ctx.fillText(caption, cardWidth / 2, totalHeight - footerHeight / 2 - 12);
 
           const today = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
           ctx.font = '400 16px sans-serif';
-          ctx.globalAlpha = 0.65;
-          ctx.fillText(today, cardWidth / 2, totalHeight - footerHeight / 2 + 30);
+          ctx.globalAlpha = 0.7;
+          ctx.fillText(today, cardWidth / 2, totalHeight - footerHeight / 2 + 28);
           ctx.globalAlpha = 1.0;
 
           const dataUrl = canvas.toDataURL('image/png');
@@ -246,16 +302,15 @@ const Home = () => {
 
   return (
     <div className="min-h-screen bg-[#050C1A] text-slate-100 font-sans pb-28 px-4 pt-6 relative selection:bg-cyan-500/30 overflow-x-hidden">
-      {/* Dark Cyan Glassmorphism Background Glow */}
+      {/* Dark Ambient Glassmorphism Background Glow */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
         <div className="absolute -top-40 -left-40 w-96 h-96 bg-cyan-500/15 rounded-full blur-[140px]" />
         <div className="absolute top-1/3 -right-32 w-96 h-96 bg-blue-600/15 rounded-full blur-[140px]" />
-        <div className="absolute -bottom-40 left-1/4 w-96 h-96 bg-emerald-500/10 rounded-full blur-[140px]" />
       </div>
 
       <div className="relative z-10 max-w-md mx-auto space-y-6">
         {/* Header Glassmorphism */}
-        <header className="bg-cyan-950/20 backdrop-blur-2xl border border-cyan-500/20 p-5 rounded-3xl shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] flex justify-between items-center">
+        <header className="bg-cyan-950/20 backdrop-blur-2xl border border-cyan-500/20 p-5 rounded-3xl shadow-xl flex justify-between items-center">
           <div>
             <span className="text-[10px] font-bold uppercase tracking-widest text-cyan-400 flex items-center gap-1">
               <LuSparkles className="w-3.5 h-3.5" /> Cyber Glass Studio
@@ -267,7 +322,7 @@ const Home = () => {
           </div>
         </header>
 
-        {/* Timer Control Box */}
+        {/* Timer Controls */}
         <div className="bg-cyan-950/20 backdrop-blur-2xl p-3.5 rounded-2xl border border-cyan-500/20 shadow-lg flex items-center justify-between">
           <span className="text-xs font-bold uppercase tracking-wider text-cyan-300/80 flex items-center gap-1.5">
             <LuTimer className="w-4 h-4 text-cyan-400" /> Time Delay:
@@ -290,11 +345,11 @@ const Home = () => {
           </div>
         </div>
 
-        {/* Normal Sized Camera Container (4:3 aspect ratio) */}
-        <div className="relative rounded-3xl overflow-hidden bg-slate-950/90 shadow-2xl border border-cyan-500/20 aspect-[4/3] flex items-center justify-center backdrop-blur-sm">
+        {/* Mobile Camera Frame Container (3:4 Portrait Ratio) */}
+        <div className="relative rounded-3xl overflow-hidden bg-slate-950/90 shadow-2xl border border-cyan-500/20 aspect-[3/4] flex items-center justify-center backdrop-blur-sm">
           {cameraError ? (
             <div className="p-6 text-center space-y-3">
-              <p className="text-rose-400 text-xs font-semibold">Camera Not Found!</p>
+              <p className="text-rose-400 text-xs font-semibold">Camera Access Failed</p>
               <button
                 onClick={startCamera}
                 className="px-4 py-2 bg-slate-900/80 hover:bg-slate-800 text-xs text-white rounded-xl border border-cyan-500/30 backdrop-blur-md"
@@ -308,24 +363,33 @@ const Home = () => {
               autoPlay
               playsInline
               muted
-              className="w-full h-full object-cover scale-x-[-1]"
+              style={{ filter: selectedFilter.css }}
+              className="w-full h-full object-cover scale-x-[-1] transition-all duration-300"
             />
+          )}
+
+          {/* Sticker Overlay Preview inside Camera View */}
+          {selectedSticker.symbol && !cameraError && (
+            <div className="absolute top-4 left-4 right-4 flex justify-between pointer-events-none text-white/80 text-xl font-bold drop-shadow">
+              <span>{selectedSticker.symbol}</span>
+              <span>{selectedSticker.symbol}</span>
+            </div>
           )}
 
           {countdown && (
             <div className="absolute inset-0 bg-slate-950/80 backdrop-blur-lg flex items-center justify-center z-20">
-              <span className="text-cyan-400 text-5xl font-black tracking-widest animate-ping drop-shadow-[0_0_20px_rgba(6,182,212,0.6)]">
+              <span className="text-cyan-400 text-6xl font-black tracking-widest animate-ping drop-shadow-[0_0_20px_rgba(6,182,212,0.6)]">
                 {countdown}
               </span>
             </div>
           )}
 
           {!cameraError && (
-            <div className="absolute bottom-4 left-0 right-0 flex justify-center z-10">
+            <div className="absolute bottom-5 left-0 right-0 flex justify-center z-10">
               <button
                 disabled={isCapturing}
                 onClick={startPhotoboothSequence}
-                className={`px-6 py-3 rounded-2xl font-bold text-xs flex items-center gap-2 shadow-xl backdrop-blur-xl border transition-all ${
+                className={`px-6 py-3.5 rounded-2xl font-bold text-xs flex items-center gap-2 shadow-xl backdrop-blur-xl border transition-all ${
                   isCapturing
                     ? 'bg-slate-900/80 border-slate-800 text-slate-500 cursor-not-allowed'
                     : 'bg-gradient-to-r from-cyan-500 via-teal-500 to-blue-500 hover:from-cyan-400 hover:to-blue-400 border-cyan-300/40 text-white shadow-cyan-500/30 active:scale-95'
@@ -341,19 +405,19 @@ const Home = () => {
         {/* Customization Options */}
         {photos.length === 4 && (
           <div className="space-y-6 pt-4 border-t border-cyan-500/20">
-            {/* Filter Effects (Without Emojis) */}
+            {/* Filter Effects with Beauty Tone (Emoji Free) */}
             <div className="space-y-2">
               <h3 className="text-xs font-bold uppercase tracking-wider text-cyan-300/80 flex items-center gap-1.5 px-1">
-                <LuSlidersHorizontal className="w-4 h-4 text-cyan-400" /> Filter Effects
+                <LuSlidersHorizontal className="w-4 h-4 text-cyan-400" /> Beauty Filters
               </h3>
-              <div className="flex gap-2.5 overflow-x-auto pb-4 pt-1 px-1 scrollbar-thin scrollbar-thumb-cyan-900/50">
+              <div className="flex gap-2.5 overflow-x-auto pb-3 pt-1 px-1 scrollbar-thin scrollbar-thumb-cyan-900/50">
                 {IMAGE_FILTERS.map((filter) => (
                   <button
                     key={filter.id}
                     onClick={() => setSelectedFilter(filter)}
                     className={`px-4 py-2.5 rounded-2xl text-xs font-semibold border transition-all shrink-0 backdrop-blur-xl ${
                       selectedFilter.id === filter.id
-                        ? 'border-cyan-400 bg-cyan-950/50 text-cyan-300 shadow-lg shadow-cyan-500/20'
+                        ? 'border-cyan-400 bg-cyan-950/60 text-cyan-300 shadow-lg shadow-cyan-500/20'
                         : 'border-cyan-500/10 bg-cyan-950/10 text-slate-400 hover:bg-cyan-950/30 hover:text-slate-200'
                     }`}
                   >
@@ -363,19 +427,42 @@ const Home = () => {
               </div>
             </div>
 
-            {/* Card Themes (Without Emojis) */}
+            {/* Aesthetic Stickers Selection (Emoji Free) */}
+            <div className="space-y-2">
+              <h3 className="text-xs font-bold uppercase tracking-wider text-cyan-300/80 flex items-center gap-1.5 px-1">
+                <LuSticker className="w-4 h-4 text-cyan-400" /> Frame Graphic Stickers
+              </h3>
+              <div className="flex gap-2.5 overflow-x-auto pb-3 pt-1 px-1 scrollbar-thin scrollbar-thumb-cyan-900/50">
+                {STICKERS.map((stk) => (
+                  <button
+                    key={stk.id}
+                    onClick={() => setSelectedSticker(stk)}
+                    className={`px-4 py-2.5 rounded-2xl text-xs font-semibold border transition-all flex items-center gap-2 shrink-0 backdrop-blur-xl ${
+                      selectedSticker.id === stk.id
+                        ? 'border-cyan-400 bg-cyan-950/60 text-cyan-300 shadow-lg shadow-cyan-500/20'
+                        : 'border-cyan-500/10 bg-cyan-950/10 text-slate-400 hover:bg-cyan-950/30 hover:text-slate-200'
+                    }`}
+                  >
+                    {stk.symbol && <span className="text-base font-bold">{stk.symbol}</span>}
+                    {stk.name}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Card Themes (Emoji Free) */}
             <div className="space-y-2">
               <h3 className="text-xs font-bold uppercase tracking-wider text-cyan-300/80 flex items-center gap-1.5 px-1">
                 <LuImage className="w-4 h-4 text-cyan-400" /> Card Themes
               </h3>
-              <div className="flex gap-2.5 overflow-x-auto pb-4 pt-1 px-1 scrollbar-thin scrollbar-thumb-cyan-900/50">
+              <div className="flex gap-2.5 overflow-x-auto pb-3 pt-1 px-1 scrollbar-thin scrollbar-thumb-cyan-900/50">
                 {THEMES.map((theme) => (
                   <button
                     key={theme.id}
                     onClick={() => setSelectedTheme(theme)}
                     className={`px-4 py-2.5 rounded-2xl text-xs font-semibold border transition-all flex items-center gap-2 shrink-0 backdrop-blur-xl ${
                       selectedTheme.id === theme.id
-                        ? 'border-cyan-400 bg-cyan-950/50 text-cyan-300 shadow-lg shadow-cyan-500/20'
+                        ? 'border-cyan-400 bg-cyan-950/60 text-cyan-300 shadow-lg shadow-cyan-500/20'
                         : 'border-cyan-500/10 bg-cyan-950/10 text-slate-400 hover:bg-cyan-950/30 hover:text-slate-200'
                     }`}
                   >
@@ -389,7 +476,7 @@ const Home = () => {
               </div>
             </div>
 
-            {/* Caption Input */}
+            {/* Caption Title */}
             <div className="bg-cyan-950/20 backdrop-blur-2xl p-3.5 rounded-2xl border border-cyan-500/20 shadow-lg">
               <label className="text-[10px] uppercase font-bold text-cyan-300/80 tracking-wider block mb-1.5">
                 Caption Title
@@ -403,7 +490,7 @@ const Home = () => {
               />
             </div>
 
-            {/* Photobooth Strip Preview */}
+            {/* Photobooth Strip Preview Layer */}
             <div
               className="p-5 rounded-3xl border shadow-2xl transition-all duration-300 space-y-4"
               style={{
@@ -412,15 +499,15 @@ const Home = () => {
                 color: selectedTheme.text,
               }}
             >
-              <div className="text-center text-[10px] uppercase font-bold tracking-widest opacity-60">
-                • PHOTO BOOTH •
+              <div className="text-center text-[10px] uppercase font-bold tracking-widest opacity-70">
+                {selectedSticker.symbol ? `${selectedSticker.symbol} PHOTO BOOTH ${selectedSticker.symbol}` : '• PHOTO BOOTH •'}
               </div>
 
-              <div className="space-y-3">
+              <div className="space-y-3.5">
                 {photos.map((src, i) => (
                   <div
                     key={i}
-                    className="p-1.5 rounded-2xl shadow-inner overflow-hidden transition-colors duration-300 aspect-[4/3]"
+                    className="p-1.5 rounded-2xl shadow-inner overflow-hidden relative aspect-[3/4]"
                     style={{ backgroundColor: selectedTheme.photoBg }}
                   >
                     <img
@@ -429,6 +516,12 @@ const Home = () => {
                       className="w-full h-full object-cover rounded-xl transition-all duration-300"
                       style={{ filter: selectedFilter.css }}
                     />
+                    {selectedSticker.symbol && (
+                      <div className="absolute top-3 left-3 right-3 flex justify-between pointer-events-none text-white/90 text-sm font-bold drop-shadow">
+                        <span>{selectedSticker.symbol}</span>
+                        <span>{selectedSticker.symbol}</span>
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>
@@ -459,7 +552,7 @@ const Home = () => {
           </div>
         )}
 
-        {/* Recent Saved Gallery */}
+        {/* Gallery Section */}
         {savedGallery.length > 0 && (
           <section className="pt-6 border-t border-cyan-500/20 space-y-3">
             <h3 className="text-xs font-bold uppercase tracking-wider text-cyan-300/80 px-1">
