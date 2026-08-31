@@ -1,33 +1,50 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { LuCamera, LuDownload, LuRefreshCw, LuSparkles, LuImage, LuTrash2, LuAperture } from 'react-icons/lu';
+import {
+  LuCamera,
+  LuDownload,
+  LuRefreshCw,
+  LuSparkles,
+  LuImage,
+  LuTrash2,
+  LuAperture,
+  LuSlidersHorizontal,
+  LuTimer
+} from 'react-icons/lu';
 
-// 8 Theme Presets (Dark Blue, Pink, Romance, Cute, Brown, White)
+// 8 Theme Presets
 const THEMES = [
-  // Dark Blue & Cyber Themes
   { id: 'cyber-cyan', name: 'Cyber Cyan', bg: '#0F172A', text: '#E2E8F0', border: '#0891B2', photoBg: '#1E293B' },
   { id: 'midnight', name: 'Midnight Glass', bg: '#0B132B', text: '#F8FAFC', border: '#1E293B', photoBg: '#1C2541' },
   { id: 'deep-ocean', name: 'Deep Ocean', bg: '#03071E', text: '#F1F5F9', border: '#1D4ED8', photoBg: '#0F172A' },
-  
-  // Pink & Romance Themes
   { id: 'romance-rose', name: 'Romance Rose', bg: '#4A0E17', text: '#FCE7F3', border: '#FB7185', photoBg: '#2D0A10' },
   { id: 'soft-pink', name: 'Soft Pink', bg: '#FDF2F8', text: '#831843', border: '#F472B6', photoBg: '#FBCFE8' },
-  
-  // Cute & Brown Themes
   { id: 'cute-brown', name: 'Cozy Brown', bg: '#2C1A14', text: '#FDE68A', border: '#D97706', photoBg: '#452719' },
   { id: 'milk-tea', name: 'Milk Tea', bg: '#F5EBE0', text: '#5C3D2E', border: '#D5B9B2', photoBg: '#E3D5CA' },
-
-  // Clean White Theme
   { id: 'pure-white', name: 'Pure White', bg: '#FFFFFF', text: '#0F172A', border: '#CBD5E1', photoBg: '#F1F5F9' },
 ];
+
+// Image Filters Presets
+const IMAGE_FILTERS = [
+  { id: 'none', name: 'Normal', css: 'none', canvasFilter: 'none' },
+  { id: 'bw', name: 'B&W', css: 'grayscale(100%)', canvasFilter: 'grayscale(100%)' },
+  { id: 'glow', name: 'Glow / Bright', css: 'brightness(115%) contrast(105%) saturate(120%)', canvasFilter: 'brightness(115%) contrast(105%) saturate(120%)' },
+  { id: 'vintage', name: 'Vintage', css: 'sepia(50%) contrast(90%)', canvasFilter: 'sepia(50%) contrast(90%)' },
+  { id: 'contrast', name: 'High Contrast', css: 'contrast(130%) brightness(95%)', canvasFilter: 'contrast(130%) brightness(95%)' },
+];
+
+const TIMER_OPTIONS = [5, 10, 20, 30];
 
 const Home = () => {
   const [photos, setPhotos] = useState([]);
   const [isCapturing, setIsCapturing] = useState(false);
   const [countdown, setCountdown] = useState(null);
   const [selectedTheme, setSelectedTheme] = useState(THEMES[0]);
+  const [selectedFilter, setSelectedFilter] = useState(IMAGE_FILTERS[0]);
+  const [selectedTimer, setSelectedTimer] = useState(5);
   const [caption, setCaption] = useState('STUDIO MEMORIES');
   const [stream, setStream] = useState(null);
   const [savedGallery, setSavedGallery] = useState([]);
+  const [cameraError, setCameraError] = useState(false);
 
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
@@ -39,10 +56,13 @@ const Home = () => {
     }
   }, []);
 
+  // Safe Camera Initialization with Fallback
   const startCamera = async () => {
+    setCameraError(false);
     try {
+      // 1st Attempt: Preferred Flexible Settings
       const mediaStream = await navigator.mediaDevices.getUserMedia({
-        video: { facingMode: 'user', width: { ideal: 720 }, height: { ideal: 960 } },
+        video: { facingMode: 'user' },
         audio: false,
       });
       setStream(mediaStream);
@@ -50,7 +70,21 @@ const Home = () => {
         videoRef.current.srcObject = mediaStream;
       }
     } catch (err) {
-      console.error('Camera access error:', err);
+      console.warn('Preferred camera settings failed, trying fallback standard video...', err);
+      try {
+        // 2nd Attempt: Direct standard fallback
+        const fallbackStream = await navigator.mediaDevices.getUserMedia({
+          video: true,
+          audio: false,
+        });
+        setStream(fallbackStream);
+        if (videoRef.current) {
+          videoRef.current.srcObject = fallbackStream;
+        }
+      } catch (fallbackErr) {
+        console.error('Camera access completely failed:', fallbackErr);
+        setCameraError(true);
+      }
     }
   };
 
@@ -90,9 +124,9 @@ const Home = () => {
     const capturedPhotos = [];
 
     for (let i = 0; i < 4; i++) {
-      for (let c = 3; c > 0; c--) {
+      for (let c = selectedTimer; c > 0; c--) {
         setCountdown(c);
-        await new Promise((r) => setTimeout(r, 800));
+        await new Promise((r) => setTimeout(r, 1000));
       }
       setCountdown('SNAP!');
       await new Promise((r) => setTimeout(r, 200));
@@ -103,7 +137,7 @@ const Home = () => {
         setPhotos([...capturedPhotos]);
       }
       setCountdown(null);
-      await new Promise((r) => setTimeout(r, 1000));
+      await new Promise((r) => setTimeout(r, 800));
     }
 
     setIsCapturing(false);
@@ -149,7 +183,11 @@ const Home = () => {
 
         ctx.fillStyle = selectedTheme.photoBg;
         ctx.fillRect((cardWidth - photoWidth) / 2 - 5, yPos - 5, photoWidth + 10, photoHeight + 10);
+
+        ctx.save();
+        ctx.filter = selectedFilter.canvasFilter;
         ctx.drawImage(img, (cardWidth - photoWidth) / 2, yPos, photoWidth, photoHeight);
+        ctx.restore();
 
         loadedCount++;
         if (loadedCount === 4) {
@@ -187,7 +225,7 @@ const Home = () => {
 
   return (
     <div className="min-h-screen bg-[#070A13] text-[#F8FAFC] font-sans pb-24 px-4 pt-6 relative selection:bg-[#38BDF8]/30 overflow-x-hidden">
-      {/* Dynamic Background Light Effects */}
+      {/* Dynamic Background */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
         <div className="absolute -top-32 -left-32 w-96 h-96 bg-[#0284C7]/20 rounded-full blur-[120px]" />
         <div className="absolute top-1/2 -right-32 w-96 h-96 bg-[#3B82F6]/15 rounded-full blur-[120px]" />
@@ -199,22 +237,56 @@ const Home = () => {
             <span className="text-[10px] font-bold uppercase tracking-widest text-[#38BDF8] flex items-center gap-1">
               <LuSparkles className="w-3.5 h-3.5" /> Digital Studio
             </span>
-            <h1 className="text-xl font-extrabold tracking-tight text-white mt-0.5">Dark Photobooth</h1>
+            <h1 className="text-xl font-extrabold tracking-tight text-white mt-0.5">Vue Photo Booth</h1>
           </div>
           <div className="w-10 h-10 rounded-2xl bg-slate-800/80 border border-slate-700/60 flex items-center justify-center text-[#38BDF8] shadow-inner">
             <LuAperture className="w-5 h-5" />
           </div>
         </header>
 
-        {/* Camera Display Box */}
+        {/* Timer Selection */}
+        <div className="bg-slate-900/60 backdrop-blur-xl p-3.5 rounded-2xl border border-slate-800 shadow-sm flex items-center justify-between">
+          <span className="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
+            <LuTimer className="w-4 h-4 text-[#38BDF8]" />Time
+          </span>
+          <div className="flex gap-1.5">
+            {TIMER_OPTIONS.map((sec) => (
+              <button
+                key={sec}
+                disabled={isCapturing}
+                onClick={() => setSelectedTimer(sec)}
+                className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${selectedTimer === sec
+                    ? 'bg-sky-500 text-white shadow-md shadow-sky-500/20'
+                    : 'bg-slate-950/80 text-slate-400 border border-slate-800 hover:text-white'
+                  }`}
+              >
+                {sec}s
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Camera Box */}
         <div className="relative rounded-3xl overflow-hidden bg-slate-950 shadow-2xl border border-slate-700/60 aspect-3/4 flex items-center justify-center">
-          <video
-            ref={videoRef}
-            autoPlay
-            playsInline
-            muted
-            className="w-full h-full object-cover scale-x-[-1]"
-          />
+          {cameraError ? (
+            <div className="p-6 text-center space-y-3">
+              <p className="text-red-700 text-xs font-semibold">Camera Not Found!</p>
+              <button
+                onClick={startCamera}
+                className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-xs text-white rounded-xl border border-slate-700"
+              >
+                Retry Camera
+              </button>
+            </div>
+          ) : (
+            <video
+              ref={videoRef}
+              autoPlay
+              playsInline
+              muted
+              className="w-full h-full object-cover scale-x-[-1]"
+            />
+          )}
 
           {countdown && (
             <div className="absolute inset-0 bg-slate-950/75 backdrop-blur-md flex items-center justify-center z-20">
@@ -224,51 +296,73 @@ const Home = () => {
             </div>
           )}
 
-          <div className="absolute bottom-5 left-0 right-0 flex justify-center z-10">
-            <button
-              disabled={isCapturing}
-              onClick={startPhotoboothSequence}
-              className={`px-7 py-3.5 rounded-2xl font-bold text-xs flex items-center gap-2 shadow-lg backdrop-blur-md border transition-all ${
-                isCapturing
-                  ? 'bg-slate-800/80 border-slate-700 text-slate-500 cursor-not-allowed'
-                  : 'bg-sky-500/90 hover:bg-sky-400 border-sky-400/50 text-white shadow-sky-500/20 active:scale-95'
-              }`}
-            >
-              <LuCamera className="w-4 h-4" />
-              {isCapturing ? 'Capturing Shots...' : 'Take 4 Shots'}
-            </button>
-          </div>
+          {!cameraError && (
+            <div className="absolute bottom-5 left-0 right-0 flex justify-center z-10">
+              <button
+                disabled={isCapturing}
+                onClick={startPhotoboothSequence}
+                className={`px-7 py-3.5 rounded-2xl font-bold text-xs flex items-center gap-2 shadow-lg backdrop-blur-md border transition-all ${isCapturing
+                    ? 'bg-slate-800/80 border-slate-700 text-slate-500 cursor-not-allowed'
+                    : 'bg-sky-500/90 hover:bg-sky-400 border-sky-400/50 text-white shadow-sky-500/20 active:scale-95'
+                  }`}
+              >
+                <LuCamera className="w-4 h-4" />
+                {isCapturing ? 'Capturing Shots...' : `Take 4 Shots (${selectedTimer}s)`}
+              </button>
+            </div>
+          )}
         </div>
 
-        {/* Customization Section */}
+        {/* Options & Output Preview */}
         {photos.length === 4 && (
           <div className="space-y-4 pt-4 border-t border-slate-800">
-            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5 px-1">
-              <LuImage className="w-4 h-4 text-[#38BDF8]" /> Customize Theme & Title
-            </h3>
-
-            {/* Scrollable Themes Selection */}
-            <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-thin scrollbar-thumb-slate-700">
-              {THEMES.map((theme) => (
-                <button
-                  key={theme.id}
-                  onClick={() => setSelectedTheme(theme)}
-                  className={`px-3.5 py-2 rounded-xl text-xs font-medium border transition-all flex items-center gap-2 shrink-0 backdrop-blur-md ${
-                    selectedTheme.id === theme.id
-                      ? 'border-[#38BDF8] bg-slate-800/90 text-white shadow-md'
-                      : 'border-slate-800 bg-slate-900/40 text-slate-400 hover:bg-slate-800/50'
-                  }`}
-                >
-                  <span
-                    className="w-3.5 h-3.5 rounded-full border border-white/20 shadow-sm"
-                    style={{ backgroundColor: theme.bg }}
-                  />
-                  {theme.name}
-                </button>
-              ))}
+            {/* Filter Options */}
+            <div className="space-y-2">
+              <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5 px-1">
+                <LuSlidersHorizontal className="w-4 h-4 text-[#38BDF8]" /> Image Filter Effects
+              </h3>
+              <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-thin scrollbar-thumb-slate-700">
+                {IMAGE_FILTERS.map((filter) => (
+                  <button
+                    key={filter.id}
+                    onClick={() => setSelectedFilter(filter)}
+                    className={`px-3.5 py-2 rounded-xl text-xs font-medium border transition-all shrink-0 ${selectedFilter.id === filter.id
+                        ? 'border-[#38BDF8] bg-slate-800/90 text-white shadow-md'
+                        : 'border-slate-800 bg-slate-900/40 text-slate-400 hover:bg-slate-800/50'
+                      }`}
+                  >
+                    {filter.name}
+                  </button>
+                ))}
+              </div>
             </div>
 
-            {/* Input Caption */}
+            {/* Card Themes */}
+            <div className="space-y-2">
+              <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5 px-1">
+                <LuImage className="w-4 h-4 text-[#38BDF8]" /> Card Themes
+              </h3>
+              <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-thin scrollbar-thumb-slate-700">
+                {THEMES.map((theme) => (
+                  <button
+                    key={theme.id}
+                    onClick={() => setSelectedTheme(theme)}
+                    className={`px-3.5 py-2 rounded-xl text-xs font-medium border transition-all flex items-center gap-2 shrink-0 ${selectedTheme.id === theme.id
+                        ? 'border-[#38BDF8] bg-slate-800/90 text-white shadow-md'
+                        : 'border-slate-800 bg-slate-900/40 text-slate-400 hover:bg-slate-800/50'
+                      }`}
+                  >
+                    <span
+                      className="w-3.5 h-3.5 rounded-full border border-white/20 shadow-sm"
+                      style={{ backgroundColor: theme.bg }}
+                    />
+                    {theme.name}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Caption Title */}
             <div className="bg-slate-900/60 backdrop-blur-xl p-3.5 rounded-2xl border border-slate-800 shadow-sm">
               <label className="text-[10px] uppercase font-bold text-slate-400 tracking-wider block mb-1.5">
                 Caption Title
@@ -282,7 +376,7 @@ const Home = () => {
               />
             </div>
 
-            {/* Photo Strip Output Preview */}
+            {/* Strip Preview */}
             <div
               className="p-5 rounded-3xl border shadow-2xl transition-all duration-300 space-y-3"
               style={{
@@ -302,7 +396,12 @@ const Home = () => {
                     className="p-1.5 rounded-xl shadow-inner overflow-hidden transition-colors duration-300"
                     style={{ backgroundColor: selectedTheme.photoBg }}
                   >
-                    <img src={src} alt={`Snap ${i + 1}`} className="w-full h-44 object-cover rounded-lg" />
+                    <img
+                      src={src}
+                      alt={`Snap ${i + 1}`}
+                      className="w-full h-44 object-cover rounded-lg transition-all duration-300"
+                      style={{ filter: selectedFilter.css }}
+                    />
                   </div>
                 ))}
               </div>
@@ -333,7 +432,7 @@ const Home = () => {
           </div>
         )}
 
-        {/* Saved Gallery Section */}
+        {/* Gallery */}
         {savedGallery.length > 0 && (
           <section className="pt-6 border-t border-slate-800/80 space-y-3">
             <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400 px-1">
